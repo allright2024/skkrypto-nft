@@ -1,0 +1,39 @@
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #828282;
+  font-size: 20px;
+}
+button {
+  border: 0;
+  color: #828282;
+  font-size: 20px;
+}
+
+@media (min-width: 700px) {
+  .my-navbar {
+    position: fixed;
+  }
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: 75px;
+  padding: 1rem;
+  color: white;
+  background: teal;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar li {
+  text-align: center;
+  flex: 1;
+  padding: 10px;
+}
