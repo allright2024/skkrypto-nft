@@ -16,10 +16,36 @@ function Signup(){
     const[passwordCheck, setPasswordCheck]=useState(true)
     const [passwordError, setPasswordError]=useState('')
     const [email, setEmail] = useState('');
-    const [emailVeri, setEmailVeri]=useState('');
-
+    const [emailVeri, setEmailVeri]=useState(0);
+    const [emailAlert, setEmailAlert]=useState(0);
+    const [eVariant, setEVariant] = useState('success');
+    const [eShow, setEShow] = useState(false)
     const onChangeId = (e)=>{
         setId(e.currentTarget.value)
+    }
+
+    const emailVerification=()=>{
+        setEShow(true)
+        console.log(email)
+        let requestOpt=getRequestOpt({"email":email});
+        fetch('http://127.0.0.1:5000/api/emailValidator/', requestOpt).then(response=>response.json()).then(jsons=>{
+            let response = jsons['isValid']
+            if(response == 1){
+                setEmailVeri(1);
+                setEmailAlert(1);
+                setEVariant('success');
+            }
+            else if (response==2) {
+                setEmailVeri(0);
+                setEmailAlert(0);
+                setEVariant('danger');
+            }
+            else{
+                setEmailVeri();
+                setEmailAlert(2);
+                setEVariant('danger');
+            }
+        })
     }
 
     const getRequestOpt=(jsons)=>{
@@ -36,7 +62,6 @@ function Signup(){
 
     function onChangePassword(e){
         setPassword(e.currentTarget.value)
-        console.log(password)
         if(e.currentTarget.value.length>6){
             setPwShow(false)
         }
@@ -49,8 +74,6 @@ function Signup(){
         setPasswordError(e.currentTarget.value!==password)
         setPasswordCheck(e.currentTarget.value)
         setPwCheckShow(passwordError)
-        console.log(password)
-        console.log(passwordCheck)
     }
     
     const onChangeEmail=(e)=>{
@@ -61,8 +84,7 @@ function Signup(){
         let requestOpt=getRequestOpt({'id':id})
         fetch('http://127.0.0.1:5000/api/idverification', requestOpt).then(response=>response.json()).then(jsons=>{
             let response = jsons['a']
-            console.log(response)
-            if(response==true){
+            if(response==="list index out of range"){
                 setMessage('You can use this ID')
                 setVariant('success')
                 setIdVeri(1)
@@ -83,7 +105,7 @@ function Signup(){
 
             <Form.Group className = "mb-3" controlId="formBasciId">
                 <Form.Label>ID</Form.Label>
-                <Form.Control type="Id" placeholder="Id"/>
+                <Form.Control type="Id" placeholder="Id" onChange={onChangeId}/>
             </Form.Group>
             <Button size="sm" style={{display : 'inline'}} onClick={onClickIdVerification}>duplication check</Button> 
             
@@ -111,18 +133,28 @@ function Signup(){
                 <Form.Label>Password Check</Form.Label>
                 <Form.Control type="password" placeholder="Password check" onClick={()=>setPwCheckShow(true&&password===passwordCheck)} onChange={onChangePasswordCheck}/>
             </Form.Group>
-            <Alert style={{margin:'10px'}} show={pwCheckShow||password===passwordCheck} variant='danger'>
+            <Alert style={{margin:'10px'}} show={pwCheckShow&&password!==passwordCheck} variant='danger'>
                 Not same with password
             </Alert>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control type="email" placeholder="Enter email" onChange={onChangeEmail}/>
                 <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                 </Form.Text>
             </Form.Group>
-
+            <Button onClick={emailVerification} size = "sm">
+                Check
+            </Button>
+            <Alert style={{marginTop:'10px'}} show={eShow} variant={eVariant}>
+                {emailAlert===0?'not valid email' : emailAlert===1? "you can use this Email" : "already registered email"}
+                <hr/>
+                <Button size = "sm" onClick={()=>setEShow(false)} variant="outline-primary">
+                    Close
+                </Button>
+            </Alert>
+            <hr/>
             <Button variant="primary" type="submit">
              Create Account
             </Button>
