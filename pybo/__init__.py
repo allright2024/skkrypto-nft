@@ -64,20 +64,19 @@ def verify():
         id=data['id']
         print(id)
 
-        user = models.User.query.filter(models.User.UserId==id)
+        try:
+            user = models.User.query.filter(models.User.UserId==id)
+            dictionary={"a": user[0].UserId}
+        except IndexError as e:
+            dictionary={"a": str(e)}
 
-        print(user)
-
-        dictionary={'a' : True}
-
-        for u in user:
-            dictionary={'a':u.UserId}
+        
 
         response.set_data(json.dumps(dictionary, ensure_ascii=False))
 
     return response
 
-@app.route('/api/emailValidator', methods=['POST', 'OPTIONS'])
+@app.route('/api/emailValidator/', methods=['POST', 'OPTIONS'])
 def emailValidator():
     response=Response()
     if request.method=='OPTIONS':
@@ -95,7 +94,12 @@ def emailValidator():
             valid=validate_email(sent_email)
             email1=valid.email
             print(email1)
-            a=1
+            try:
+                u=models.User.query.filter(models.User.UserEmail==email1)
+                dictionary={"a":u[0].UserEmail} #이 dictionary를 만들 수 있다면 이미 db에 해당 email이 존재한다는 의미
+                a=3
+            except:
+                a=1
 
             
         except EmailNotValidError as e:
