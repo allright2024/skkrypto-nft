@@ -31,7 +31,7 @@ function Navbar1() {
                 <Navbar.Toggle/>
                 <Navbar.Collapse className="justify-content-end">
                     <Nav.Link href='/home/login'><Button variant="light" style={{float: 'right', paddingRight:'10px', marginRight:'10px'}} color="primary" className="float-right" onClick={onClick}>로그인</Button></Nav.Link>
-                    <Nav.Link href = "/home/logout"><Button variant="light" style={{float: 'right'}}  className="float-right" onClick={onClick}>회원가입</Button></Nav.Link>
+                    <Nav.Link href = "/home/signup"><Button variant="light" style={{float: 'right'}}  className="float-right" onClick={onClick}>회원가입</Button></Nav.Link>
                 </Navbar.Collapse>
             </Navbar>
            

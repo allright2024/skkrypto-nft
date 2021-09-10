@@ -61,8 +61,8 @@ function Transaction() {
                 result.push(
                     <tr>
                         <td>{i+1}</td>
-                        <td>{fromLi[i]}</td>
                         <td>{toLi[i]}</td>
+                        <td>{fromLi[i]}</td>
                         <td>{valueLi[i]}</td>
                         <td>{create_dateLi[i].split('.')[0]}</td>
                     </tr>
