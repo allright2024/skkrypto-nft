@@ -8,7 +8,10 @@ import Contact from './components/Contact.js';
 import Transaction from './components/Transaction.js'
 import ViewOne from './components/ViewOne.js';
 import Navbar1 from './components/Navbar';
+import Home from './components/Home';
+import Login from './components/Login';
 import "./style.css"
+import Signup from './components/Signup';
 
 function App() {
   return (
@@ -22,12 +25,23 @@ function App() {
         </Route>
 
         <Route exact path="/home">
-         <Navbar1/>
+          <Home/>
+          <Navbar1/>
         </Route>
 
         <Route path="/home/contact">
           
           <Contact/>
+          <Navbar1/>
+        </Route>
+
+        <Route path="/home/signup">
+          <Signup/>
+          <Navbar1/>
+        </Route>
+
+        <Route path="/home/login">
+          <Login/>
           <Navbar1/>
         </Route>
         
