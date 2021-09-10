@@ -2,6 +2,7 @@ from flask import Flask, Response, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy 
 from flask_cors import CORS
+from email_validator import validate_email, EmailNotValidError
 
 from datetime import datetime
 import json
@@ -48,6 +49,89 @@ def merge_dic(x,y):
 #     return response    
         
 
+@app.route('/api/idverification/', methods=['POST','OPTIONS'])
+def verify():
+    response=Response()
+    if request.method=='OPTIONS':
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "POST")
+    elif request.method=="POST":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+
+        data1=request.get_data()
+        data=json.loads(data1)
+        id=data['id']
+        print(id)
+
+        user = models.User.query.filter(models.User.UserId==id)
+
+        print(user)
+
+        dictionary={'a' : True}
+
+        for u in user:
+            dictionary={'a':u.UserId}
+
+        response.set_data(json.dumps(dictionary, ensure_ascii=False))
+
+    return response
+
+@app.route('/api/emailValidator', methods=['POST', 'OPTIONS'])
+def emailValidator():
+    response=Response()
+    if request.method=='OPTIONS':
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "POST")
+    elif request.method =="POST":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+
+        data1=request.get_data()
+        data=json.loads(data1)
+
+        sent_email=data['email']
+        try:
+            valid=validate_email(sent_email)
+            email1=valid.email
+            print(email1)
+            a=1
+
+            
+        except EmailNotValidError as e:
+            a=2
+
+        
+        response.set_data(json.dumps({'isValid':a},ensure_ascii=False))
+
+    return response
+        
+            
+
+@app.route('/api/createUser/', methods=['POST','OPTIONS'])
+def createUser():
+    response = Response()
+    if request.method=='OPTIONS':
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "POST")
+    elif request.method =="POST":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+
+        data1= request.get_data()
+        data=json.loads(data1)
+
+        id=data['id']
+        password=data['pw']
+        email=data['email']
+
+        newUser = models.User(UserId=id,UserPW=password,UserEmail=email)
+        db.session.add(newUser)
+        db.session.commit()
+
+        response.set_data(json.dumps('True', ensure_ascii=False))
+
+    return response
 
 
 @app.route('/api/createTx/', methods=['POST', 'OPTIONS'])
@@ -85,10 +169,6 @@ def detail():
         response.headers.add("Access-Control-Allow-Origin", "*")
         data1 =request.get_data()
         data=json.loads(data1)
-        methods = request.method
-        print(data)
-        print(json.loads(data1)["who"])
-        print(methods)
         cur_state=data["who"]
         address=data["address"]
         justDict={}
