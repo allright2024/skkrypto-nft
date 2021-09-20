@@ -10,14 +10,17 @@ function Transaction() {
     const [fromLi, setFromLi] = useState([])
     const [create_dateLi,setCreate_dateLi] = useState([])
     const [valueLi, setValueLi] = useState([])
+    const [typeLi, setTypeLi] = useState([])
 
     const getRequest=()=>{
         return{
-            method:'GET',
+            method:'POST',
             headers:{
+                'Content-Type':'application/json',
                 'Access-Control-Allow-Origin':"*",
                 'Access-Control-Allow-Headers':"*"
-            }
+            },
+            body:JSON.stringify({'a':'a'})
         }
     }
 
@@ -29,20 +32,23 @@ function Transaction() {
         let toList=[]
         let fromList=[]
         let valueList=[]
+        let typeList=[]
         let create_dateList=[]
-        fetch('http://127.0.0.1:5000/api/viewAll', requestOpt).then(response=>response.json()).then(jsons=>{
+        fetch('http://localhost:5000/api/viewAll', requestOpt).then(response=>response.json()).then(jsons=>{
             
 
             for (let i=1;jsons[i]!==undefined;i++){
                 fromList.push(jsons[i]['from'])
                 toList.push(jsons[i]['to'])
                 valueList.push(jsons[i]['value'])
+                typeList.push(jsons[i]['type'])
                 create_dateList.push(jsons[i]['create_date'])
             }
             console.log(jsons[1])
             setToLi(fromList)
             setFromLi(toList)
             setValueLi(valueList)
+            setTypeLi(typeList)
             setCreate_dateLi(create_dateList)
             console.log(create_dateList)
         })
@@ -64,6 +70,7 @@ function Transaction() {
                         <td>{toLi[i]}</td>
                         <td>{fromLi[i]}</td>
                         <td>{valueLi[i]}</td>
+                        <td>{typeLi[i]}</td>
                         <td>{create_dateLi[i].split('.')[0]}</td>
                     </tr>
                 )
@@ -77,6 +84,7 @@ function Transaction() {
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Value</th>
+                                <th>Type</th>
                                 <th>create_date</th>
                             </tr>
                         </thead>
