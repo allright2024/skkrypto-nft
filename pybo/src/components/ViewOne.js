@@ -9,9 +9,11 @@ function ViewOne(){
     const [from, setFrom]=useState('')
     const[to, setTo] = useState('')
     const [value, setValue] = useState('')
+    const[type, setType] = useState('')
     const [create_date,setCreate_date]=useState('')
     const [cur_state, setCur_state]=useState('')
     const[address,setAddress] = useState('')
+    
 
     const onClick=()=>{
         let requestOpt=getRequest({"who":cur_state, "address":address})
@@ -21,20 +23,23 @@ function ViewOne(){
         let fromList=[]
         let toList=[]
         let valueList=[]
+        let typeList=[]
         let create_dateList=[]
 
-        fetch("http://127.0.0.1:5000/api/detail/txId", requestOpt).then(response=>response.json()).then(jsons=>{
+        fetch("http://localhost:5000/api/detail/txId", requestOpt).then(response=>response.json()).then(jsons=>{
             
             if(1){
                 for(let i=1;jsons[i]!==undefined;i++){
                     fromList.push(jsons[i]['from'])
                     toList.push(jsons[i]['to'])
                     valueList.push(jsons[i]['value'])
+                    typeList.push(jsons[i]['type'])
                     create_dateList.push(jsons[i]['create_date'])
                 }
                 setFrom(fromList)
                 setTo(toList)
                 setValue(valueList)
+                setType(typeList)
                 setCreate_date(create_dateList)
             }
         })
@@ -70,7 +75,8 @@ function ViewOne(){
                         <td>{from[i]}</td>
                         <td>{to[i]}</td>
                         <td>{value[i]}</td>
-                        <td>{create_date[i].split('.')[0]}</td>
+                        <td>{type[i]}</td>
+                        <td>{create_date[i]}</td>
                     </tr>
                 )
             }
@@ -85,6 +91,7 @@ function ViewOne(){
                             <th>From</th>
                             <th>To</th>
                             <th>Value</th>
+                            <th>Type</th>
                             <th>create_date</th>
                         </tr>
                     </thead>
