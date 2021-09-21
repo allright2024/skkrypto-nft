@@ -1,7 +1,7 @@
 # api-and-react
 
 ## 준비사항
-#### - anaconda를 통해 python 라이브러리 설치할 것(pip install ~~)
+#### - anaconda설치해서 가상환경 만들고 python 라이브러리 설치할 것(pip install ~~)
 #### - npx create-react-app pybo로 pybo 폴더에 react 설치
 #### - npm install 명령어를 통해 필요한 라이브러리 설치
 #### - mysql 설치 후 skkrypto라는 이름의 database를 만들고 해당 데이터베이스 안에 user, new, transaction이라는 table 만들 것.
