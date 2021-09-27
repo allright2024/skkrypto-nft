@@ -12,11 +12,12 @@ function ViewOne(){
     const[type, setType] = useState('')
     const [create_date,setCreate_date]=useState('')
     const [cur_state, setCur_state]=useState('')
+    const [dropdown, setDropdown] = useState('')
     const[address,setAddress] = useState('')
     
 
     const onClick=()=>{
-        let requestOpt=getRequest({"who":cur_state, "address":address})
+        let requestOpt=getRequest({"who":cur_state,"type": dropdown, "address":address})
 
         console.log(requestOpt)
 
@@ -125,10 +126,14 @@ function ViewOne(){
                 />
                 <br/>
                 <Form.Control style ={{marginTop:'20px'}} type="text" placeholder="Text from or to ID" onChange={handleChange}/> 
-                
-            </div>
+                </div>
             </Form>
-            
+            <form>
+                <select value ={dropdown} onChange= {(e)=>{setDropdown(e.target.value)}}>
+                    <option value = "1">Selection A</option>
+                    <option value = "2">Selection B</option>
+                </select>
+            </form>
             <Button style ={{marginTop:'20px'}}variant="primary"onClick={onClick}>Search</Button>
             <div style={{marginLeft:'0px', marginTop:'10px'}}>{getSomeTxs()}</div>
         </div>
