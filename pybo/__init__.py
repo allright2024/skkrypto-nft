@@ -94,29 +94,32 @@ def emailValidator():
     return response
 
 
-@app.route('/api/createUser/', methods=['POST', 'OPTIONS'])
+@app.route('/api/createUser/', methods = ['POST', 'OPTIONS'])
 def createUser():
     response = Response()
-    if request.method == 'OPTIONS':
+    if request.method=='OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+    elif request.method =="POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
-        data = json.loads(data1)
+        data=json.loads(data1)
 
         id = data['id']
         password = data['password']
         email = data['email']
 
         newUser = UserInfo(_userid=id, _userpw=password, _useremail=email)
+        user = User(_username=id, _pointA=0, _pointB=0, _pointC=0, _pointD=0)
+
         db.session.add(newUser)
+        db.session.add(user)
         db.session.commit()
 
         response.set_data(json.dumps('True', ensure_ascii=False))
-
+    
     return response
 
 
