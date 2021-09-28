@@ -44,7 +44,7 @@ alter table userinfo add column _hash VARCHAR(32);
 #### - python start.py로 api 실행
 #### - 프로젝트 디렉토리에서 cd pybo 후에 npm start
 #### - 제대로 연동되는지 확인하기 
-INSERT INTO transaction VALUES(1,"Alice","Bob",5,"1","2021-09-22") 쿼리문 넣어주고, from ALice 'Search tx'창에서 제대로 뜨나 확인
+INSERT INTO transaction VALUES(1,"Alice","Bob",5,"1","2021-09-22", NULL) 쿼리문 넣어주고, from ALice 'Search tx'창에서 제대로 뜨나 확인
 
 ## 그외 나머지 정보 
 #### - pybo/model 폴더에 user_model.py가 있는데 skkrypto라는 데이터베이스 내에서 table을 추가하면 user_model.py에 새로운 class 추가해서 적용.
