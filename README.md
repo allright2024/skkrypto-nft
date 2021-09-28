@@ -4,7 +4,7 @@
 #### - anaconda설치해서 가상환경 만들고 python 라이브러리 설치(pip install ~~)
 #### - npx create-react-app pybo로 pybo 폴더에 react 설치
 #### - npm install 명령어를 통해 필요한 라이브러리 설치
-#### - mysql 설치 후 skkrypto라는 이름의 database를 만들고 해당 데이터베이스 안에 user, new, transaction이라는 table 생성.
+#### - mysql 설치 후 skkrypto라는 이름의 database를 만들고 해당 데이터베이스 안에 user, userinfo, transaction이라는 table 생성.
 ##### table 정보는 pybo/model폴더의 user_model.py에 있음.(column 이름 똑같이 해야 에러 뜨지 않음.)
 ##### SQL문은 아래와 같음 
 
