@@ -5,7 +5,7 @@ from email_validator import validate_email, EmailNotValidError
 from sqlalchemy import and_
 from pybo.model.user_model import Transaction, User, UserInfo
 from datetime import datetime
-
+from flask import Flask, request, url_for, abort, redirect
 import json
 
 app = Flask(__name__)
@@ -94,32 +94,29 @@ def emailValidator():
     return response
 
 
-@app.route('/api/createUser/', methods = ['POST', 'OPTIONS'])
+@app.route('/api/createUser/', methods=['POST', 'OPTIONS'])
 def createUser():
     response = Response()
-    if request.method=='OPTIONS':
+    if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method =="POST":
+    elif request.method == "POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
-        data=json.loads(data1)
+        data = json.loads(data1)
 
         id = data['id']
         password = data['password']
         email = data['email']
 
         newUser = UserInfo(_userid=id, _userpw=password, _useremail=email)
-        user = User(_username=id, _pointA=0, _pointB=0, _pointC=0, _pointD=0)
-
         db.session.add(newUser)
-        db.session.add(user)
         db.session.commit()
 
         response.set_data(json.dumps('True', ensure_ascii=False))
-    
+
     return response
 
 
@@ -186,36 +183,46 @@ def CreateTx():
         exist_to = User.query.filter_by(_username = to_hash).first()
 
         if exist_from != None and exist_to != None:
-            i = 1
             if location == 'A':
                 if int(cur_value) <= exist_from._pointA:
                     from_user = db.session.query(User).filter(User._username == from_hash).update({'_pointA': User._pointA - int(cur_value)})
                     to_user = db.session.query(User).filter(User._username == to_hash).update({'_pointA': User._pointA + int(cur_value)})
                     db.session.commit()
                     dictionary = {'from_user': exist_from._username ,'from_Value': exist_from._pointA - int(cur_value), 'to_user': exist_to._username,'to_Value': exist_to._pointA + int(cur_value)}
+                else:
+                    dictionary = {}
             elif location == 'B':
                 if int(cur_value) <= exist_from._pointB:
                     from_user = db.session.query(User).filter(User._username == from_hash).update({'_pointB': User._pointB - int(cur_value)})
                     to_user = db.session.query(User).filter(User._username == to_hash).update({'_pointB': User._pointB + int(cur_value)})
                     db.session.commit()
                     dictionary = {'from_user': exist_from._username, 'from_Value': exist_from._pointB - int(cur_value),'to_user': exist_to._username, 'to_Value': exist_to._pointB + int(cur_value)}
+                else:
+                    dictionary = {}
             elif location == 'C':
                 if int(cur_value) <= exist_from._pointC:
                     from_user = db.session.query(User).filter(User._username == from_hash).update({'_pointA': User._pointC - int(cur_value)})
                     to_user = db.session.query(User).filter(User._username == to_hash).update({'_pointA': User._pointC + int(cur_value)})
                     db.session.commit()
                     dictionary = {'from_user': exist_from._username, 'from_Value': exist_from._pointC - int(cur_value),'to_user': exist_to._username, 'to_Value': exist_to._pointC + int(cur_value)}
+                else:
+                    dictionary = {}
             elif location == 'D':
                 if int(cur_value) <= exist_from._pointD:
                     from_user = db.session.query(User).filter(User._username == from_hash).update({'_pointA': User._pointD - int(cur_value)})
                     to_user = db.session.query(User).filter(User._username == to_hash).update({'_pointA': User._pointD + int(cur_value)})
                     db.session.commit()
                     dictionary = {'from_user': exist_from._username, 'from_Value': exist_from._pointD - int(cur_value),'to_user': exist_to._username, 'to_Value': exist_to._pointD + int(cur_value)}
-
-            # dictionary = {'id': user_info.id, 'user': user_info._username, 'A_Value': user_info._pointA,'B_Value': user_info._pointB, 'C_Value': user_info._pointC,'D_Value': user_info._pointD}
+                else:
+                    dictionary = {}
+            else:
+                dictionary = {}
+            i = 1
             newDict = {str(i): dictionary}
             i += 1
             justDict = merge_dic(justDict, newDict)
+        else:
+            dictionary = {}
         response.set_data(json.dumps(justDict))
     return response
 
