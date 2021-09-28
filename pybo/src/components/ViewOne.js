@@ -12,7 +12,7 @@ function ViewOne(){
     const[type, setType] = useState('')
     const [create_date,setCreate_date]=useState('')
     const [cur_state, setCur_state]=useState('')
-    const [dropdown, setDropdown] = useState('')
+    const [dropdown, setDropdown] = useState('1')
     const[address,setAddress] = useState('')
     
 
@@ -38,6 +38,7 @@ function ViewOne(){
                     create_dateList.push(jsons[i]['create_date'])
                 }
                 setFrom(fromList)
+                console.log(from)
                 setTo(toList)
                 setValue(valueList)
                 setType(typeList)
