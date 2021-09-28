@@ -60,7 +60,7 @@ class User(db.Model):
         self._pointC=_pointC
         self._pointD=_pointD
 
-class New():
+class UserInfo(db.Model):
     """
     table name : new
     table information 
@@ -68,7 +68,7 @@ class New():
     _userpw
     _useremail
     """
-    __tablename__ = 'new'
+    __tablename__ = 'userinfo'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
     _userid = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable = False)
