@@ -36,6 +36,8 @@ _type varchar(1) NOT NULL,
 _date varchar(32)
 );
 
+alter table userinfo add column _hash VARCHAR(32);
+
 #### - __init__.py 파일에서 db={...} dictionary 내용 환경에 맞게 변경.
 
 ## 실행 방법
