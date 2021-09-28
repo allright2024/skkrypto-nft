@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from email_validator import validate_email, EmailNotValidError
 from sqlalchemy import and_
-from pybo.model.user_model import Transaction, User, New
+from pybo.model.user_model import Transaction, User, UserInfo
 
 from datetime import datetime
 import json
