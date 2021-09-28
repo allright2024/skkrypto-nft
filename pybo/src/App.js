@@ -52,8 +52,8 @@ function App() {
           <Navbar1/>
         </Route>
 
-        <Route path="/home/viewAll">
-          <Transaction/>
+        <Route path="/home/viewPoint">
+          <ViewPoint/>
           <Navbar1/>
         </Route>
 

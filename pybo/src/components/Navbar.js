@@ -18,7 +18,7 @@ function Navbar1() {
                 <Navbar.Brand href='/home'>Skkrypto</Navbar.Brand>
                 <Nav className="me-auto">
                     <NavDropdown title="Link" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="/home/viewAll">View All Txs</NavDropdown.Item>
+                        <NavDropdown.Item href="/home/viewPoint">user point</NavDropdown.Item>
                         <NavDropdown.Item href="/home/searchTx">search Tx</NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item href="/home/createTx">create Tx</NavDropdown.Item>
