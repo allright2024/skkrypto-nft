@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Button} from 'react-bootstrap';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+import { useHistory } from 'react-router-dom';
 
 function Signup(){
     const [show,setShow]=useState(false);
@@ -83,6 +84,7 @@ function Signup(){
     const onClickIdVerification=()=>{
         let requestOpt=getRequestOpt({'id':id})
         fetch('http://localhost:5000/api/idverification', requestOpt).then(response=>response.json()).then(jsons=>{
+            console.log(jsons)
             let response = jsons['a']
             console.log(response)
             if(response==="list index out of range"){
@@ -105,8 +107,8 @@ function Signup(){
         let requestOpt = getRequestOpt({"id": id, "password":password,"email":email})
         fetch('http://localhost:5000/api/createUser', requestOpt).then(response=>response.json()).then(jsons=>{
             alert("success")
+            window.history.back();
         })
-
     }   
     
     return (
