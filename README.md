@@ -11,7 +11,7 @@
 CREATE DATABASE skkrypto;
 use skkrypto;
 
-CREATE TABLE new(
+CREATE TABLE userinfo(
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 _userid varchar(32) NOT NULL,
 _userpw varchar(32) NOT NULL,
