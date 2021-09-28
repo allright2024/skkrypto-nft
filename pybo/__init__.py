@@ -34,22 +34,29 @@ def merge_dic(x, y):
 @app.route('/api/idverification/', methods=['POST', 'OPTIONS'])
 def verify():
     response = Response()
-    if request.method == 'OPTIONS':
+    if request.method=='OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+    elif request.method=="POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
-        data1 = request.get_data()
-        data = json.loads(data1)
+        data1=request.get_data()
+        data=json.loads(data1)
         id = data['id']
+        new = UserInfo.query.filter(UserInfo._userid==id).first()
+        
+        print(str(type(new))=="<class 'NoneType'>")
 
-        try:
-            new = New.query.filter(New._userid == id)
-            dictionary = {"a": new[0]._userid}
-        except IndexError as e:
-            dictionary = {"a": str(e)}
+        if str(type(new)) == "<class 'NoneType'>":
+            dictionary={"a": "list index out of range"}
+        else:
+            dictionary = {"a": "hi"}
+        
+        # try:
+        #     dictionary={"a" : new._userid}
+        # except IndexError as e:
+        #     dictionary={"a": str(e)}
 
         response.set_data(json.dumps(dictionary, ensure_ascii=False))
 
@@ -59,57 +66,58 @@ def verify():
 @app.route('/api/emailValidator/', methods=['POST', 'OPTIONS'])
 def emailValidator():
     response = Response()
-    if request.method == 'OPTIONS':
+    if request.method=='OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+    elif request.method =="POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
         data = json.loads(data1)
 
-        sent_email = data['email']
+        sent_email=data['email']
 
         try:
             valid = validate_email(sent_email)
-            email1 = valid.email(sent_email)
+            email1=valid.email
             try:
-                u = New.query.filter(New._useremail == email1)
-                dictionary = {"a": u[0]._useremail}
-                a = 3
+                u=UserInfo.query.filter(UserInfo._useremail==email1)
+                dictionary = {"a":u[0]._useremail}
+                a=3
             except:
-                a = 1
+                a=1
         except EmailNotValidError as e:
-            a = 2
+            a=2
 
-        response.set_data(json.dumps({'isValid': a}, ensure_ascii=False))
+        response.set_data(json.dumps({'isValid' : a}, ensure_ascii=False))
     return response
 
 
-@app.route('/api/createUser/', methods=['POST', 'OPTIONS'])
+
+@app.route('/api/createUser/', methods = ['POST', 'OPTIONS'])
 def createUser():
     response = Response()
-    if request.method == 'OPTIONS':
+    if request.method=='OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+    elif request.method =="POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
-        data = json.loads(data1)
+        data=json.loads(data1)
 
         id = data['id']
-        password = data['pw']
+        password = data['password']
         email = data['email']
 
-        newUser = New(_userid=id, _userpw=password, _useremail=email)
+        newUser = UserInfo(_userid=id, _userpw=password, _useremail=email)
         db.session.add(newUser)
         db.session.commit()
 
         response.set_data(json.dumps('True', ensure_ascii=False))
-
+    
     return response
 
 
