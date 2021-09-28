@@ -82,8 +82,9 @@ function Signup(){
 
     const onClickIdVerification=()=>{
         let requestOpt=getRequestOpt({'id':id})
-        fetch('http://127.0.0.1:5000/api/idverification', requestOpt).then(response=>response.json()).then(jsons=>{
+        fetch('http://localhost:5000/api/idverification', requestOpt).then(response=>response.json()).then(jsons=>{
             let response = jsons['a']
+            console.log(response)
             if(response==="list index out of range"){
                 setMessage('You can use this ID')
                 setVariant('success')
@@ -98,6 +99,15 @@ function Signup(){
             }
         })
     }
+
+    const onClickNew=(e)=>{
+        e.preventDefault();
+        let requestOpt = getRequestOpt({"id": id, "password":password,"email":email})
+        fetch('http://localhost:5000/api/createUser', requestOpt).then(response=>response.json()).then(jsons=>{
+            alert("success")
+        })
+
+    }   
     
     return (
         <>
@@ -155,7 +165,7 @@ function Signup(){
                 </Button>
             </Alert>
             <hr/>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick = {onClickNew}>
              Create Account
             </Button>
         </Form>
