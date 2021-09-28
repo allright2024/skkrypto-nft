@@ -10,6 +10,8 @@ import ViewOne from './components/ViewOne.js';
 import Navbar1 from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
+import CreateTx from './components/CreateTx';
+import ViewPoint from './components/ViewPoint.js';
 import "./style.css"
 import Signup from './components/Signup';
 
@@ -46,6 +48,7 @@ function App() {
         </Route>
         
         <Route path="/home/CreateTx">
+          <CreateTx/>
           <Navbar1/>
         </Route>
 
