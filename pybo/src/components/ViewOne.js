@@ -131,8 +131,10 @@ function ViewOne(){
             </Form>
             <form>
                 <select value ={dropdown} onChange= {(e)=>{setDropdown(e.target.value)}}>
-                    <option value = "1">Selection A</option>
-                    <option value = "2">Selection B</option>
+                    <option value = "A">Selection A</option>
+                    <option value = "B">Selection B</option>
+                    <option value = "C">Selection C</option>
+                    <option value = "D">Selection D</option>
                 </select>
             </form>
             <Button style ={{marginTop:'20px'}}variant="primary"onClick={onClick}>Search</Button>
