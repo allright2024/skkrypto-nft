@@ -208,3 +208,24 @@ def viewAll():
         result.set_data(json.dumps(justDict))
 
     return result
+
+@app.route('/api/userInfo/', methods=["POST", "OPTIONS"])
+def userInfo():
+    response = Response()
+    if request.method=='OPTIONS':
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "POST")
+    elif request.method =="POST":
+        response.headers.add("Access-Control-Allow-Origin", "*")
+
+        data1=request.get_data()
+        data = json.loads(data1)
+        
+        username = data["username"]
+        user = User.query.filter(User._username==username)
+
+        dictionary = {'username':user[0]._username, 'pointA':user[0]._pointA, 'pointB':user[0]._pointB,'pointC':user[0]._pointC,'pointD':user[0]._pointD}
+
+        response.set_data(json.dumps(dictionary))
+    return response
