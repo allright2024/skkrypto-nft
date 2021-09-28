@@ -113,7 +113,10 @@ def createUser():
         email = data['email']
 
         newUser = UserInfo(_userid=id, _userpw=password, _useremail=email)
+        user = User(_username=id, _pointA=0, _pointB=0, _pointC=0, _pointD=0)
+
         db.session.add(newUser)
+        db.session.add(user)
         db.session.commit()
 
         response.set_data(json.dumps('True', ensure_ascii=False))
