@@ -36,7 +36,11 @@ _type varchar(1) NOT NULL,
 _date varchar(32)
 );
 
+### 진행 중 추가사항(9.30)
 alter table userinfo add column _hash VARCHAR(32);
+alter table userinfo add UNIQUE (_userid); 
+alter table user add UNIQUE (_username);
+alter table userinfo add FOREIGN KEY(_userid) REFERENCES user(_username);
 
 #### - __init__.py 파일에서 db={...} dictionary 내용 환경에 맞게 변경.
 
