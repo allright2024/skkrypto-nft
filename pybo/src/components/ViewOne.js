@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import Form from 'react-bootstrap/Form'
 import {Button} from 'react-bootstrap';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import Table from 'react-bootstrap/Table'
 
@@ -11,9 +14,12 @@ function ViewOne(){
     const [value, setValue] = useState('')
     const[type, setType] = useState('')
     const [create_date,setCreate_date]=useState('')
+    const [hash, setHash] = useState('')
     const [cur_state, setCur_state]=useState('')
     const [dropdown, setDropdown] = useState('1')
     const[address,setAddress] = useState('')
+
+    const [typeCheck, setTypeCheck] = useState('ALL') // 'all' : all, 'A' : A, 'B' : B, 'C': C, 'D':D
     
 
     const onClick=()=>{
@@ -26,6 +32,7 @@ function ViewOne(){
         let valueList=[]
         let typeList=[]
         let create_dateList=[]
+        let hashList=[]
 
         fetch("http://localhost:5000/api/detail/txId", requestOpt).then(response=>response.json()).then(jsons=>{
             
@@ -36,6 +43,7 @@ function ViewOne(){
                     valueList.push(jsons[i]['value'])
                     typeList.push(jsons[i]['type'])
                     create_dateList.push(jsons[i]['create_date'])
+                    hashList.push(jsons[i]['hash'])
                 }
                 setFrom(fromList)
                 console.log(from)
@@ -43,6 +51,7 @@ function ViewOne(){
                 setValue(valueList)
                 setType(typeList)
                 setCreate_date(create_dateList)
+                setHash(hashList)
             }
         })
 
@@ -71,16 +80,80 @@ function ViewOne(){
 
         if(create_date[0]!==undefined){
             for(let i =0;i<to.length;i++){
-                result.push(
-                    <tr>
-                        <td>{i+1}</td>
-                        <td>{from[i]}</td>
-                        <td>{to[i]}</td>
-                        <td>{value[i]}</td>
-                        <td>{type[i]}</td>
-                        <td>{create_date[i]}</td>
-                    </tr>
-                )
+                if(typeCheck==='ALL'){
+                    result.push(
+                        <tr>
+                            <td>{i+1}</td>
+                            <td>{from[i]}</td>
+                            <td>{to[i]}</td>
+                            <td>{value[i]}</td>
+                            <td>{type[i]}</td>
+                            <td>{create_date[i]}</td>
+                            <td>{hash[i]}</td>
+                        </tr>
+                    )
+                }
+                else if(typeCheck==='A'){
+                    if(type[i]==='A'){
+                        result.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{from[i]}</td>
+                                <td>{to[i]}</td>
+                                <td>{value[i]}</td>
+                                <td>{type[i]}</td>
+                                <td>{create_date[i]}</td>
+                                <td>{hash[i]}</td>
+                            </tr>
+                        )
+                    }
+                }
+                else if(typeCheck==='B'){
+                    if(type[i]==='B'){
+                        result.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{from[i]}</td>
+                                <td>{to[i]}</td>
+                                <td>{value[i]}</td>
+                                <td>{type[i]}</td>
+                                <td>{create_date[i]}</td>
+                                <td>{hash[i]}</td>
+                            </tr>
+                        )
+                    }
+                }
+                else if(typeCheck==='C'){
+                    if(type[i]==='C'){
+                        result.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{from[i]}</td>
+                                <td>{to[i]}</td>
+                                <td>{value[i]}</td>
+                                <td>{type[i]}</td>
+                                <td>{create_date[i]}</td>
+                                <td>{hash[i]}</td>
+                            </tr>
+                        )
+                    }
+                }
+                else if(typeCheck==='D'){
+                    if(type[i]==='D'){
+                        result.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{from[i]}</td>
+                                <td>{to[i]}</td>
+                                <td>{value[i]}</td>
+                                <td>{type[i]}</td>
+                                <td>{create_date[i]}</td>
+                                <td>{hash[i]}</td>
+                            </tr>
+                        )
+                    }
+                }
+                
             }
         }
 
@@ -93,8 +166,15 @@ function ViewOne(){
                             <th>From</th>
                             <th>To</th>
                             <th>Value</th>
-                            <th>Type</th>
+                            <DropdownButton as={ButtonGroup} title={typeCheck} id="bg-vertical-dropdown-3" variant="outline-dark">
+                            <Dropdown.Item eventKey="1" size = "sm" onClick={()=>setTypeCheck('ALL')}>ALL</Dropdown.Item>
+                                <Dropdown.Item eventKey="1" size = "sm" onClick={()=>setTypeCheck('A')}>A</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" size = "sm" onClick={()=>setTypeCheck('B')}>B</Dropdown.Item>
+                                <Dropdown.Item eventKey="3" size = "sm" onClick={()=>setTypeCheck('C')}>C</Dropdown.Item>
+                                <Dropdown.Item eventKey="4" size = "sm" onClick={()=>setTypeCheck('D')}>D</Dropdown.Item>
+                            </DropdownButton>
                             <th>create_date</th>
+                            <th>Hash</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,14 +209,6 @@ function ViewOne(){
                 <Form.Control style ={{marginTop:'20px'}} type="text" placeholder="Text from or to ID" onChange={handleChange}/> 
                 </div>
             </Form>
-            <form>
-                <select value ={dropdown} onChange= {(e)=>{setDropdown(e.target.value)}}>
-                    <option value = "A">Selection A</option>
-                    <option value = "B">Selection B</option>
-                    <option value = "C">Selection C</option>
-                    <option value = "D">Selection D</option>
-                </select>
-            </form>
             <Button style ={{marginTop:'20px'}}variant="primary"onClick={onClick}>Search</Button>
             <div style={{marginLeft:'0px', marginTop:'10px'}}>{getSomeTxs()}</div>
         </div>
