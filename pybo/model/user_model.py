@@ -1,3 +1,4 @@
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -22,19 +23,20 @@ class Transaction(db.Model):
     _point = db.Column(db.Integer, nullable = False)
     _type = db.Column(db.String(1, 'utf8mb4_unicode_ci'), nullable=False)
     _date = db.Column(db.String(32, 'utf8mb4_unicode_ci'))
+    _hash = db.Column(db.String(32, 'utf8mb4_unicode_ci'))
 
-    def __init__(self, _from, _to,_point, _type, _date):
+    def __init__(self, _from, _to,_point, _type, _date, _hash):
         self._from = _from
         self._to=_to 
         self._point=_point 
         self._type=_type
         self._date=_date 
+        self._hash = _hash
 
 
 class User(db.Model):
     """
     tablename : user
-
     table information
     -id
     -_username
@@ -47,7 +49,7 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
-    _username = db.Column(db.String(32, 'utf8mb4_unicode_ci'),nullable = False)
+    _username = db.Column(db.String(32, 'utf8mb4_unicode_ci'),nullable = False, unique=True)
     _pointA = db.Column(db.Integer, nullable=False)
     _pointB = db.Column(db.Integer, nullable=False)
     _pointC = db.Column(db.Integer, nullable=False)
@@ -71,7 +73,7 @@ class UserInfo(db.Model):
     __tablename__ = 'userinfo'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
-    _userid = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable = False)
+    _userid = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable = False, unique=True)
     _userpw = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable=False)
     _useremail=db.Column(db.String(32,'utf8mb4_unicode_ci'), nullable=False)
 
