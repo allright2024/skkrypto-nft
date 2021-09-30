@@ -264,7 +264,7 @@ def userInfo():
         try:
             dictionary = {'username':user[0]._username, 'pointA':user[0]._pointA, 'pointB':user[0]._pointB,'pointC':user[0]._pointC,'pointD':user[0]._pointD}
         except:
-            dictionary = {'username':"", "pointA":"", 'pointB':"", "pointC":"", "poincD":""}
+            dictionary = {'username': "", "pointA": "", 'pointB': "", "pointC": "", "pointD": ""}
 
         response.set_data(json.dumps(dictionary))
     return response
