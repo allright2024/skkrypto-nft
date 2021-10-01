@@ -217,9 +217,12 @@ def CreateTx():
             newDict = {str(i): dictionary}
             i += 1
             justDict = merge_dic(justDict, newDict)
+
+        tx = Transaction(_from=from_hash, _to=to_hash, _point =cur_value, _type=location,_date = 'Null', _hash='Null')
+        db.session.add(tx)
+        db.session.commit()
         response.set_data(json.dumps(justDict))
     return response
-
 
 @app.route('/api/viewAll/', methods=["POST", "OPTIONS"])
 def viewAll():
