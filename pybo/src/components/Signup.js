@@ -13,7 +13,8 @@ function Signup(){
     const [message, setMessage] = useState('you can`t use this ID')
     const [id,setId]=useState('');
     const [password, setPassword]=useState('');
-    const [idVeri, setIdVeri]=useState(0);
+    //idveri (2:아직 duplication check 버튼 누르지 않음) (1: id 유효함) (0: id 중복됨)
+    const [idVeri, setIdVeri]=useState(2);
     const[passwordCheck, setPasswordCheck]=useState(true)
     const [passwordError, setPasswordError]=useState('')
     const [email, setEmail] = useState('');
@@ -104,11 +105,24 @@ function Signup(){
 
     const onClickNew=(e)=>{
         e.preventDefault();
-        let requestOpt = getRequestOpt({"id": id, "password":password,"email":email})
-        fetch('http://localhost:5000/api/createUser', requestOpt).then(response=>response.json()).then(jsons=>{
-            alert("success")
-            window.history.back();
-        })
+        console.dir(e.target.parentElement);
+        if(e.target.parentElement[2].value.length <= 5) {
+            alert("PW is too short.");
+        } else if (e.target.parentElement[2].value !== e.target.parentElement[3].value) {
+            alert("Please check is worng.");
+        } else if (emailVeri !== 1) {
+            alert("Email is not vaild.");
+        } else if (idVeri == 2) {
+            alert("Please check id duplication.");
+        } else if (idVeri == 0) {
+            alert("ID is duplicated.");
+        } else {
+            let requestOpt = getRequestOpt({"id": id, "password":password,"email":email})
+            fetch('http://localhost:5000/api/createUser', requestOpt).then(response=>response.json()).then(jsons=>{
+                alert("success")
+                window.history.back();
+            })
+        }
     }   
     
     return (
