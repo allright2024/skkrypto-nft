@@ -10,7 +10,17 @@ function WalletConnect() {
     };
 
     return (
-        <Box as="button" onClick={onClick}>
+        <Box
+            as="button"
+            onClick={onClick}
+            h="40px"
+            borderRadius={20}
+            w="full"
+            bg="#4318FF"
+            color="white"
+            fontSize="sm"
+            fontWeight="bold"
+        >
             <Text>지갑 연결하기</Text>
         </Box>
     );

@@ -5,11 +5,11 @@ function PointStatus() {
     return (
         <VStack
             borderRadius={15}
-            bg="yellow"
+            bg="white"
             p={10}
             align="flex-start"
             h="355px"
-            w={isLessThan1195 ? "full" : "46%"}
+            w={isLessThan1195 ? "full" : "45%"}
             m={3}
         >
             <Text fontSize="3xl" fontWeight="700">

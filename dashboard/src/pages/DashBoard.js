@@ -11,16 +11,15 @@ import PointStatus from "../components/PointStatus";
 import WalletConnect from "../components/WalletConnect";
 
 function DashBoard() {
-    const [isLessThan1342] = useMediaQuery("(max-width:1342px)");
+    const [isLessThan1070] = useMediaQuery("(max-width:1070px)");
     return (
         <Flex wrap="wrap" w="full" h="full" justify="space-evenly" bg="#E5E5E5">
             <Flex
-                justify="center"
-                p={10}
+                justify="space-between"
+                p={5}
                 wrap="wrap"
                 minW="350px"
-                w="76%"
-                bg="white"
+                w={isLessThan1070 ? "full" : "60%"}
             >
                 <TotalPoint />
                 <PointStatus />
@@ -29,9 +28,9 @@ function DashBoard() {
                 <PointStatus />
             </Flex>
             <VStack
-                minW={isLessThan1342 ? "350px" : 0}
-                w={isLessThan1342 ? "76%" : "250px"}
-                bg="white"
+                p={5}
+                minW={isLessThan1070 ? "350px" : 0}
+                w={isLessThan1070 ? "full" : "300px"}
             >
                 <WalletConnect />
             </VStack>

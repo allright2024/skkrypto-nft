@@ -19,7 +19,7 @@ function NavBar() {
     }
 
     return (
-        <VStack spacing={8} p={9} bg="#ffffff" minW="300px">
+        <VStack spacing={8} p={9} bg="#ffffff" minW="200px">
             <HStack>
                 <Text fontSize="xl" fontWeight="900" color="#4318FF">
                     KingoChain
@@ -30,7 +30,7 @@ function NavBar() {
                     <HStack
                         p={3}
                         borderRadius={5}
-                        w="150px"
+                        w="130px"
                         bg={index === 0 ? "#4318FF" : "#ffffff"}
                         spacing={3}
                     >
@@ -52,7 +52,7 @@ function NavBar() {
                     <HStack
                         p={3}
                         borderRadius={5}
-                        w="150px"
+                        w="130px"
                         bg={index === 1 ? "#4318FF" : "#ffffff"}
                         spacing={3}
                     >
@@ -78,7 +78,7 @@ function NavBar() {
                     <HStack
                         p={2}
                         borderRadius={5}
-                        w="150px"
+                        w="130px"
                         bg={index === 2 ? "#4318FF" : "#ffffff"}
                     >
                         <Text

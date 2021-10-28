@@ -5,6 +5,7 @@ function TotalPoint() {
         <VStack
             justify="space-between"
             p={5}
+            m={3}
             backgroundImage="linear-gradient(#532DFB,#868CFF)"
             w="full"
             h="204px"
