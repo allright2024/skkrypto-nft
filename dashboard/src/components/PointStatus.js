@@ -1,6 +1,7 @@
-import { VStack, HStack, Text } from "@chakra-ui/react";
+import { VStack, HStack, Text, useMediaQuery } from "@chakra-ui/react";
 
 function PointStatus() {
+    const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
     return (
         <VStack
             borderRadius={15}
@@ -8,7 +9,7 @@ function PointStatus() {
             p={10}
             align="flex-start"
             h="355px"
-            w="45%"
+            w={isLessThan1195 ? "full" : "46%"}
             m={3}
         >
             <Text fontSize="3xl" fontWeight="700">
