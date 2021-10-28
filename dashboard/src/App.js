@@ -3,6 +3,7 @@ import styled from "styled-components";
 import NavBar from "./components/NavBar";
 import { Container, Flex } from "@chakra-ui/react";
 import DashBoard from "./pages/DashBoard";
+import MyTransactions from "./pages/MyTransactions";
 
 const AppWrap = styled.div`
     font-size: 12px;
@@ -17,6 +18,11 @@ function App() {
                     <HashRouter>
                         <NavBar />
                         <Route exact="true" path="/" component={DashBoard} />
+                        <Route
+                            exact="true"
+                            path="/my-transactions"
+                            component={MyTransactions}
+                        />
                     </HashRouter>
                 </Flex>
             </Container>

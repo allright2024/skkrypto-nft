@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { VStack, HStack, Img, Text, RouterLink, Link } from "@chakra-ui/react";
+import { VStack, HStack, Img, Text, Link } from "@chakra-ui/react";
 import activeDashboard from "../assets/activeDashboard.svg";
 import dashboard from "../assets/dashboard.svg";
 import transactions from "../assets/transactions.svg";
 import activeTransactions from "../assets/activeTransactions.svg";
+import { Link as RouterLink } from "react-router-dom";
 
 function NavBar() {
     const [index, setIndex] = useState(0);
