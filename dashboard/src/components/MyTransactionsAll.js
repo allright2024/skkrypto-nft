@@ -3,7 +3,6 @@ import kakaoTalk from "../assets/kakaoTalk.png";
 
 const Table = styled.table`
   width: 100%;
-  
 `;
 
 const Td = styled.td`
@@ -30,7 +29,7 @@ text-align: center;
 
 `;
 
-export default function LatestTransactions() {
+export default function MyTransactionsAll() {
   return (
     <Table>
       <thead>
@@ -64,7 +63,6 @@ export default function LatestTransactions() {
           </Td>
           <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
-          <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>
           <Td>금액</Td>
           <Td>ebcaef...</Td>

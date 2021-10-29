@@ -3,7 +3,6 @@ import kakaoTalk from "../assets/kakaoTalk.png";
 
 const Table = styled.table`
   width: 100%;
-  
 `;
 
 const Td = styled.td`
@@ -25,12 +24,11 @@ const Icon = styled.img`
 `;
 
 const Time = styled.td`
-color: #aeb4c4;
-text-align: center;
-
+  color: #aeb4c4;
+  text-align: center;
 `;
 
-export default function LatestTransactions() {
+export default function MyTransactionsSend() {
   return (
     <Table>
       <thead>
@@ -38,7 +36,7 @@ export default function LatestTransactions() {
           <Th> </Th>
           <Th>플랫폼</Th>
           <Th>시간</Th>
-          <Th>FROM</Th>
+
           <Th>TO</Th>
           <Th>금액</Th>
           <Th>HASH</Th>
@@ -52,7 +50,7 @@ export default function LatestTransactions() {
           </Td>
           <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
-          <Td>0xF503f059...</Td>
+
           <Td>0xF503f059...</Td>
           <Td>금액</Td>
           <Td>ebcaef...</Td>
@@ -64,7 +62,6 @@ export default function LatestTransactions() {
           </Td>
           <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
-          <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>
           <Td>금액</Td>
           <Td>ebcaef...</Td>

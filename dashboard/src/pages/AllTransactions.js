@@ -2,6 +2,7 @@ import { Flex, HStack, Text, VStack, Box } from "@chakra-ui/layout";
 import LatestBlock from "../components/LatestBlocks";
 import LatestTransactions from "../components/LatestTransactions";
 
+
 function AllTransactions() {
   return (
     <Flex m={10} flexDirection="column" w="full">
@@ -49,6 +50,7 @@ function AllTransactions() {
         </HStack>
 
         <LatestTransactions />
+  
       </VStack>
 
       {/* 거래내역 */}
