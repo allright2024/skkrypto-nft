@@ -3,6 +3,7 @@ import { useState } from "react";
 import MyTransactionsAll from "../components/MyTransactionsAll";
 import MyTransactionsSend from "../components/MyTransactionsSend";
 import MyTransactionsReceive from "../components/MyTransactionsReceive";
+import TransactionsChart from "../components/TransactionsChart";
 
 function MySelect({select}) {
   if (select === 2) {return <MyTransactionsReceive />;}
@@ -22,6 +23,12 @@ function MyTransactions() {
             </Text>
 
             {/* 그래프 */}
+
+            <VStack w="full" backgroundColor="white" borderRadius="5px" p={5} marginBottom={5} marginTop={5}>
+            <TransactionsChart/>
+            </VStack>
+
+
 
             <HStack>
                 <Box

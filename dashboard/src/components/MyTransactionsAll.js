@@ -64,6 +64,7 @@ export default function MyTransactionsAll() {
           <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
+          <Td>0xF503f059...</Td>
           <Td>금액</Td>
           <Td>ebcaef...</Td>
         </tr>
