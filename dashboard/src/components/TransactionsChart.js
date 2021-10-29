@@ -1,57 +1,35 @@
 import { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import {
+    LineChart,
+    Line,
+    Tooltip,
+    YAxis,
+    XAxis,
+    CartesianGrid,
+    ResponsiveContainer,
+} from "recharts";
+import data from "../assets/data.json";
 
 export default function TransactionsChart() {
-  const [state, setState] = useState({
-    series: [
-      {
-        name: "series1",
-        data: [1800, 1500, 1000, 500, 100, 50, 2000],
-      },
-    ],
-    options: {
-      colors: ["#4318FF"],
-
-      chart: {
-        height: 350,
-        type: "area",
-        width: 1200,
-      },
-      dataLabels: {
-        enabled: false,
-      },
-
-      stroke: {
-        curve: "smooth",
-      },
-      xaxis: {
-        type: "datetime",
-        categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
-        ],
-      },
-      tooltip: {
-        x: {
-          format: "dd/MM/yy HH:mm",
-        },
-      },
-    },
-  });
-  return (
-    <div>
-      <ReactApexChart
-        options={state.options}
-        series={state.series}
-        type="area"
-        height={350}
-        width={1200}
-      />
-    </div>
-  );
+    return (
+        <ResponsiveContainer width="95%" height={180} debounce={1}>
+            <LineChart
+                data={data}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+                <YAxis />
+                <Tooltip
+                    itemStyle={{ fontSize: "5px" }}
+                    contentStyle={{ fontSize: "0px" }}
+                    wrapperStyle={{ padding: 0, border: "none" }}
+                />
+                <Line
+                    dot={false}
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#4318ff"
+                />
+            </LineChart>
+        </ResponsiveContainer>
+    );
 }
