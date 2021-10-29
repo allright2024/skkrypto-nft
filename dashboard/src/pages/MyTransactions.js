@@ -14,6 +14,7 @@ function MySelect({select}) {
 
 function MyTransactions() {
   const [index, setIndex] = useState(0);
+
     return (
         <Flex m={10} flexDirection="column" w="full">
 
@@ -33,27 +34,36 @@ function MyTransactions() {
             <HStack>
                 <Box
                     as="button"
-                    backgroundColor="white"
+                    backgroundColor={index===0?"#4318FF":"white"}
+                    color={index===0?"white":"black"}
                     borderRadius="3px"
                     width="60px"
                     fontWeight="bold"
-                    onClick={()=>{setIndex(0);}}
+                    onClick={()=>{
+                      setIndex(0);
+
+                    }
+                  }
                 >
                     ALL
                 </Box>
                 <Box
                     as="button"
-                    backgroundColor="white"
+                    backgroundColor={index===1?"#4318FF":"white"}
+                    color={index===1?"white":"black"}
                     borderRadius="3px"
                     width="60px"
                     fontWeight="bold"
-                    onClick={()=>{setIndex(1);}}
+                    onClick={()=>{
+                      setIndex(1);
+                    }}
                 >
                     보낸 내역
                 </Box>
                 <Box
                     as="button"
-                    backgroundColor="white"
+                    backgroundColor={index===2?"#4318FF":"white"}
+                    color={index===2?"white":"black"}
                     borderRadius="3px"
                     width="60px"
                     fontWeight="bold"

@@ -1,9 +1,9 @@
+import { HStack, Text } from "@chakra-ui/layout";
 import styled from "styled-components";
 import kakaoTalk from "../assets/kakaoTalk.png";
 
 const Table = styled.table`
   width: 100%;
-  
 `;
 
 const Td = styled.td`
@@ -21,13 +21,12 @@ const Th = styled.th`
 const Icon = styled.img`
   src: ${(props) => props.src};
   width: 20px;
-  margin-left: 10px;
+  alt: "kakao";
 `;
 
 const Time = styled.td`
-color: #aeb4c4;
-text-align: center;
-
+  color: #aeb4c4;
+  text-align: center;
 `;
 
 export default function LatestTransactions() {
@@ -35,7 +34,6 @@ export default function LatestTransactions() {
     <Table>
       <thead>
         <tr>
-          <Th> </Th>
           <Th>플랫폼</Th>
           <Th>시간</Th>
           <Th>FROM</Th>
@@ -48,9 +46,11 @@ export default function LatestTransactions() {
       <tbody>
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>
@@ -60,9 +60,11 @@ export default function LatestTransactions() {
 
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>

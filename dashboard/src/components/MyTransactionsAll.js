@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import kakaoTalk from "../assets/kakaoTalk.png";
+import { HStack, Text } from "@chakra-ui/layout";
 
 const Table = styled.table`
   width: 100%;
@@ -24,9 +25,8 @@ const Icon = styled.img`
 `;
 
 const Time = styled.td`
-color: #aeb4c4;
-text-align: center;
-
+  color: #aeb4c4;
+  text-align: center;
 `;
 
 export default function MyTransactionsAll() {
@@ -34,7 +34,6 @@ export default function MyTransactionsAll() {
     <Table>
       <thead>
         <tr>
-          <Th> </Th>
           <Th>플랫폼</Th>
           <Th>시간</Th>
           <Th>FROM</Th>
@@ -47,9 +46,11 @@ export default function MyTransactionsAll() {
       <tbody>
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>
@@ -59,9 +60,11 @@ export default function MyTransactionsAll() {
 
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
           <Td>0xF503f059...</Td>

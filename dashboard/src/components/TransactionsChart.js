@@ -10,13 +10,17 @@ export default function TransactionsChart() {
       },
     ],
     options: {
+      colors: ["#4318FF"],
+
       chart: {
         height: 350,
         type: "area",
+        width: 1200,
       },
       dataLabels: {
         enabled: false,
       },
+
       stroke: {
         curve: "smooth",
       },
@@ -46,7 +50,7 @@ export default function TransactionsChart() {
         series={state.series}
         type="area"
         height={350}
-        width={1000}
+        width={1200}
       />
     </div>
   );

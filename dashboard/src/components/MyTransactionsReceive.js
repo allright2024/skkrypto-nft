@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import kakaoTalk from "../assets/kakaoTalk.png";
+import { HStack, Text } from "@chakra-ui/layout";
 
 const Table = styled.table`
   width: 100%;
@@ -33,7 +34,6 @@ export default function MyTransactionsReceive() {
     <Table>
       <thead>
         <tr>
-          <Th> </Th>
           <Th>플랫폼</Th>
           <Th>시간</Th>
 
@@ -46,9 +46,12 @@ export default function MyTransactionsReceive() {
       <tbody>
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
 
           <Td>0xF503f059...</Td>
@@ -58,9 +61,12 @@ export default function MyTransactionsReceive() {
 
         <tr>
           <Td>
-            <Icon src={kakaoTalk} />
+
+            <HStack justifyContent="center">
+              <Icon src={kakaoTalk} />
+              <Text>kakaoPay</Text>
+            </HStack>
           </Td>
-          <Td>kakaoPay</Td>
           <Time>2021-09-26 14:13:40</Time>
           <Td>0xF503f059...</Td>
           <Td>금액</Td>
