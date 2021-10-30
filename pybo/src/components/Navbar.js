@@ -90,6 +90,23 @@ function NavBar() {
                         </Text>
                     </HStack>
                 </Link>
+                <Link onClick={() => setIndex(3)} as={RouterLink} to="/admin-page">
+                    <HStack
+                        p={3}
+                        borderRadius={5}
+                        w="130px"
+                        bg={index === 3 ? "#4318FF" : "#ffffff"}
+                        spacing={3}
+                    >
+                        <Text
+                            fontSize="sm"
+                            fontWeight="bold"
+                            color={index === 3 ? "#ffffff" : "#A3AED0"}
+                        >
+                            관리자 페이지
+                        </Text>
+                    </HStack>
+                </Link>
             </VStack>
         </VStack>
     );
