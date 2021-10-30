@@ -3,27 +3,6 @@ import LatestBlock from "../components/LatestBlocks";
 import LatestTransactions from "../components/LatestTransactions";
 
 function AllTransactions() {
-    const getRequest=()=>{
-        return{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Origin':"*",
-                'Access-Control-Allow-Headers':"*"
-            },
-            body:JSON.stringify({'a':'a'})
-        }
-    }
-
-    const apicall=()=>{
-        console.log("hello");
-        
-        const requestOpt=getRequest();
-        fetch('http://localhost:5000/api/viewAll', requestOpt).then(response=>response.json()).then(jsons=>{
-            console.log(jsons);
-        })
-    }
-
     return (
         <Flex m={10} flexDirection="column" w="full">
             <Text fontSize="3xl" fontWeight="700">
@@ -51,7 +30,6 @@ function AllTransactions() {
                         borderRadius="3px"
                         width="60px"
                         fontWeight="bold"
-                        onClick={apicall}
                     >
                         + More
                     </Box>
