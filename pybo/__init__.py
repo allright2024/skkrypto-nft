@@ -13,7 +13,7 @@ CORS(app)
 
 db = {
     'user': 'root',
-    'password': '12345',
+    'password': 'smisawesome53!',
     'host': 'localhost',
     'port': '3306',
     'database': 'skkrypto'

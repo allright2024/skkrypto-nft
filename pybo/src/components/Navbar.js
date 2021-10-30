@@ -1,42 +1,98 @@
-import React, {useState} from 'react';
-import { Link } from "react-router-dom";
-import {Button, NavDropdown, Navbar, Nav} from 'react-bootstrap';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
-import "./Navbar.css"
-import Contact from './Contact.js';
+import { useState } from "react";
+import { VStack, HStack, Img, Text, Link } from "@chakra-ui/react";
+import activeDashboard from "../assets/activeDashboard.svg";
+import dashboard from "../assets/dashboard.svg";
+import transactions from "../assets/transactions.svg";
+import activeTransactions from "../assets/activeTransactions.svg";
+import { Link as RouterLink } from "react-router-dom";
 
-function Navbar1() {
-    const [sign, setSign] = useState(true)
-    const onClick = () => {
-        setSign((prev) => !prev)
+function NavBar() {
+    const [index, setIndex] = useState(0);
+    const path = window.location.pathname.split("/").pop();
+
+    if (path === "/") {
+        index !== 0 && setIndex(0);
+    } else if (path === "my-transaction") {
+        index !== 1 && setIndex(1);
+    } else if (path === "all-transactions") {
+        index !== 2 && setIndex(2);
     }
 
-
     return (
-        <div style={{float:'right'}} >
-            <Navbar bg="dark" variant="dark" >
-                <Navbar.Brand href='/home'>Skkrypto</Navbar.Brand>
-                <Nav className="me-auto">
-                    <NavDropdown title="Link" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="/home/viewPoint">user point</NavDropdown.Item>
-                        <NavDropdown.Item href="/home/searchTx">search Tx</NavDropdown.Item>
-                        <NavDropdown.Divider/>
-                        <NavDropdown.Item href="/home/createTx">create Tx</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="/home/contact" >Contact</Nav.Link>
-                    
-                </Nav>
-                    
-                
-                <Navbar.Toggle/>
-                <Navbar.Collapse className="justify-content-end">
-                    <Nav.Link href='/home/login'><Button variant="light" style={{float: 'right', paddingRight:'10px', marginRight:'10px'}} color="primary" className="float-right" onClick={onClick}>로그인</Button></Nav.Link>
-                    <Nav.Link href = "/home/signup"><Button variant="light" style={{float: 'right'}}  className="float-right" onClick={onClick}>회원가입</Button></Nav.Link>
-                </Navbar.Collapse>
-            </Navbar>
-           
-        </div>
+        <VStack spacing={8} p={9} bg="#ffffff" minW="200px">
+            <HStack>
+                <Text fontSize="xl" fontWeight="900" color="#4318FF">
+                    KingoChain
+                </Text>
+            </HStack>
+            <VStack spacing={5}>
+                <Link onClick={() => setIndex(0)} as={RouterLink} to="/">
+                    <HStack
+                        p={3}
+                        borderRadius={5}
+                        w="130px"
+                        bg={index === 0 ? "#4318FF" : "#ffffff"}
+                        spacing={3}
+                    >
+                        <Img src={index === 0 ? activeDashboard : dashboard} />
+                        <Text
+                            fontSize="sm"
+                            fontWeight="bold"
+                            color={index === 0 ? "#ffffff" : "#A3AED0"}
+                        >
+                            대시보드
+                        </Text>
+                    </HStack>
+                </Link>
+                <Link
+                    onClick={() => setIndex(1)}
+                    as={RouterLink}
+                    to="/my-transactions"
+                >
+                    <HStack
+                        p={3}
+                        borderRadius={5}
+                        w="130px"
+                        bg={index === 1 ? "#4318FF" : "#ffffff"}
+                        spacing={3}
+                    >
+                        <Img
+                            src={
+                                index === 1 ? activeTransactions : transactions
+                            }
+                        />
+                        <Text
+                            fontSize="sm"
+                            fontWeight="bold"
+                            color={index === 1 ? "#ffffff" : "#A3AED0"}
+                        >
+                            My 거래내역
+                        </Text>
+                    </HStack>
+                </Link>
+                <Link
+                    onClick={() => setIndex(2)}
+                    as={RouterLink}
+                    to="/all-transactions"
+                >
+                    <HStack
+                        p={2}
+                        borderRadius={5}
+                        w="130px"
+                        bg={index === 2 ? "#4318FF" : "#ffffff"}
+                    >
+                        <Text
+                            fontSize="sm"
+                            fontWeight="bold"
+                            color={index === 2 ? "#ffffff" : "#A3AED0"}
+                        >
+                            전체 거래내역
+                        </Text>
+                    </HStack>
+                </Link>
+            </VStack>
+        </VStack>
     );
 }
 
-export default Navbar1;
+export default NavBar;

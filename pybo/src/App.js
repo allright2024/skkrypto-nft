@@ -1,68 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-import './style.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
-import React, {useState} from 'react';
-import Contact from './components/Contact.js';
-import Transaction from './components/Transaction.js'
-import ViewOne from './components/ViewOne.js';
-import Navbar1 from './components/Navbar';
-import Home from './components/Home';
-import Login from './components/Login';
-import CreateTx from './components/CreateTx';
-import ViewPoint from './components/ViewPoint.js';
-import "./style.css"
-import Signup from './components/Signup';
+import { HashRouter, Route } from "react-router-dom";
+import styled from "styled-components";
+import NavBar from "./components/NavBar";
+import { Container, Flex } from "@chakra-ui/react";
+import DashBoard from "./pages/DashBoard";
+import MyTransactions from "./pages/MyTransactions";
+import AllTransactions from "./pages/AllTransactions";
+
+const AppWrap = styled.div`
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+`;
 
 function App() {
   return (
-    <div className="">
-      
-      <Router>
-      
-        
-        <Route exact path = "/">
-          <Redirect to="/home"/>
-        </Route>
-
-        <Route exact path="/home">
-          <Home/>
-          <Navbar1/>
-        </Route>
-
-        <Route path="/home/contact">
-          
-          <Contact/>
-          <Navbar1/>
-        </Route>
-
-        <Route path="/home/signup">
-          <Signup/>
-          <Navbar1/>
-        </Route>
-
-        <Route path="/home/login">
-          <Login/>
-          <Navbar1/>
-        </Route>
-        
-        <Route path="/home/CreateTx">
-          <CreateTx/>
-          <Navbar1/>
-        </Route>
-
-        <Route path="/home/viewPoint">
-          <ViewPoint/>
-          <Navbar1/>
-        </Route>
-
-        <Route path="/home/searchTx">
-          <ViewOne/>
-          <Navbar1/>
-        </Route>
-      </Router>
-    </div>
+    <AppWrap>
+      <Container maxW="full" bg="#E5E5E5" p={0}>
+        <Flex minH="100vh" h="full">
+          <HashRouter>
+            <NavBar />
+            <Route exact="true" path="/" component={DashBoard} />
+            <Route
+              exact="true"
+              path="/my-transactions"
+              component={MyTransactions}
+            />
+            <Route
+              exact="true"
+              path="/all-transactions"
+              component={AllTransactions}
+            />
+          </HashRouter>
+        </Flex>
+      </Container>
+    </AppWrap>
   );
 }
 
