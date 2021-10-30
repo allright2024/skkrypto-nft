@@ -1,7 +1,7 @@
 alembic==1.7.1
 antiorm==1.2.1
 certifi==2021.5.30
-click==.0.1
+click==8.0.1
 colorama==0.4.4
 db==0.1.1
 db-sqlite3==0.0.1
@@ -22,7 +22,6 @@ MarkupSafe==2.0.1
 numpy==1.21.2
 pip== 21.0.1
 PyMySQL==1.0.2
-setuptools==52.0.0.post20210125
 six== 1.16.0
 SQLAlchemy==1.4.23
 Werkzeug==2.0.1
