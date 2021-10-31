@@ -25,16 +25,10 @@ function DashBoard() {
             >
                 <TotalPoint />
                 <PointStatus />
-                <PointStatus />
+                <AccountInfo />
                 <PointStatus />
                 <PointStatus />
             </Flex>
-            <VStack p={5} minW={isLessThan1070 ? "350px" : 0} flexGrow="1">
-                <WalletConnect />
-                <VStack p={5} w="full" bg="white" borderRadius={20}>
-                    <AccountInfo />
-                </VStack>
-            </VStack>
         </Flex>
     );
 }

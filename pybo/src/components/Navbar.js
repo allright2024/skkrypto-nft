@@ -10,7 +10,7 @@ function NavBar() {
     const [index, setIndex] = useState(0);
     const path = window.location.pathname.split("/").pop();
 
-    if (path === "/") {
+    if (path === "/dashboard") {
         index !== 0 && setIndex(0);
     } else if (path === "my-transaction") {
         index !== 1 && setIndex(1);
@@ -25,51 +25,61 @@ function NavBar() {
                     KingoChain
                 </Text>
             </HStack>
-            <VStack spacing={5}>
-                <Link onClick={() => setIndex(0)} as={RouterLink} to="/">
-                    <HStack
-                        p={3}
-                        borderRadius={5}
-                        w="130px"
-                        bg={index === 0 ? "#4318FF" : "#ffffff"}
-                        spacing={3}
+            <VStack h="full" justify="space-between" spacing={5}>
+                <VStack>
+                    <Link
+                        onClick={() => setIndex(0)}
+                        as={RouterLink}
+                        to="/dashboard"
                     >
-                        <Img src={index === 0 ? activeDashboard : dashboard} />
-                        <Text
-                            fontSize="sm"
-                            fontWeight="bold"
-                            color={index === 0 ? "#ffffff" : "#A3AED0"}
+                        <HStack
+                            p={3}
+                            borderRadius={5}
+                            w="130px"
+                            bg={index === 0 ? "#4318FF" : "#ffffff"}
+                            spacing={3}
                         >
-                            대시보드
-                        </Text>
-                    </HStack>
-                </Link>
-                <Link
-                    onClick={() => setIndex(1)}
-                    as={RouterLink}
-                    to="/my-transactions"
-                >
-                    <HStack
-                        p={3}
-                        borderRadius={5}
-                        w="130px"
-                        bg={index === 1 ? "#4318FF" : "#ffffff"}
-                        spacing={3}
+                            <Img
+                                src={index === 0 ? activeDashboard : dashboard}
+                            />
+                            <Text
+                                fontSize="sm"
+                                fontWeight="bold"
+                                color={index === 0 ? "#ffffff" : "#A3AED0"}
+                            >
+                                대시보드
+                            </Text>
+                        </HStack>
+                    </Link>
+                    <Link
+                        onClick={() => setIndex(1)}
+                        as={RouterLink}
+                        to="/my-transactions"
                     >
-                        <Img
-                            src={
-                                index === 1 ? activeTransactions : transactions
-                            }
-                        />
-                        <Text
-                            fontSize="sm"
-                            fontWeight="bold"
-                            color={index === 1 ? "#ffffff" : "#A3AED0"}
+                        <HStack
+                            p={3}
+                            borderRadius={5}
+                            w="130px"
+                            bg={index === 1 ? "#4318FF" : "#ffffff"}
+                            spacing={3}
                         >
-                            My 거래내역
-                        </Text>
-                    </HStack>
-                </Link>
+                            <Img
+                                src={
+                                    index === 1
+                                        ? activeTransactions
+                                        : transactions
+                                }
+                            />
+                            <Text
+                                fontSize="sm"
+                                fontWeight="bold"
+                                color={index === 1 ? "#ffffff" : "#A3AED0"}
+                            >
+                                My 거래내역
+                            </Text>
+                        </HStack>
+                    </Link>
+                </VStack>
                 <Link
                     onClick={() => setIndex(2)}
                     as={RouterLink}
@@ -84,7 +94,7 @@ function NavBar() {
                         <Text
                             fontSize="sm"
                             fontWeight="bold"
-                            color={index === 2 ? "#ffffff" : "#A3AED0"}
+                            color={index === 2 ? "#ffffff" : "#00000"}
                         >
                             전체 거래내역
                         </Text>
