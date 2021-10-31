@@ -20,7 +20,7 @@ function TotalPoint() {
             <HStack w="full" justify="space-between">
                 <Box />
                 <Text color="white" fontWeight="700" fontSize="5xl">
-                    7,893 point
+                    3,350 point
                 </Text>
             </HStack>
         </VStack>
