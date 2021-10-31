@@ -90,7 +90,7 @@ function NavBar() {
                         </Text>
                     </HStack>
                 </Link>
-                <Link onClick={() => setIndex(3)} as={RouterLink} to="/admin-page">
+                {/* <Link onClick={() => setIndex(3)} as={RouterLink} to="/admin-page">
                     <HStack
                         p={3}
                         borderRadius={5}
@@ -106,7 +106,7 @@ function NavBar() {
                             관리자 페이지
                         </Text>
                     </HStack>
-                </Link>
+                </Link> */}
             </VStack>
         </VStack>
     );

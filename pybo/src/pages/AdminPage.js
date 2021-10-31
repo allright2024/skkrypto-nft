@@ -1,7 +1,16 @@
 import {
-    Flex, HStack, Text, VStack, Box, Input, Button,
-    FormControl, FormLabel, FormErrorMessage, FormHelperText,
-  } from "@chakra-ui/react"
+    Flex,
+    HStack,
+    Text,
+    VStack,
+    Box,
+    Input,
+    Button,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+} from "@chakra-ui/react";
 
 function AdminPage() {
     const handleCreateTransaction = (event) => {
@@ -10,14 +19,16 @@ function AdminPage() {
         console.log(event.target.parentElement.parentElement.children[5].value);
         console.log(event.target.parentElement.parentElement.children[7].value);
         console.log(event.target.parentElement.parentElement.children[9].value);
-        console.log(event.target.parentElement.parentElement.children[11].value);
-    }
+        console.log(
+            event.target.parentElement.parentElement.children[11].value
+        );
+    };
 
     const handleCreateUserInfo = (event) => {
         console.log(event.target.parentElement.children[1].value);
         console.log(event.target.parentElement.children[3].value);
         console.log(event.target.parentElement.children[5].value);
-    }
+    };
 
     return (
         <Flex m={10} flexDirection="column" w="full">
@@ -66,11 +77,7 @@ function AdminPage() {
                         <Text>트랜잭션 생성하기</Text>
                     </Button>
                 </FormControl>
-
-                
-
             </VStack>
-
             <VStack
                 w="full"
                 backgroundColor="white"
@@ -106,11 +113,7 @@ function AdminPage() {
                         <Text>유저 정보 생성하기</Text>
                     </Button>
                 </FormControl>
-
-                
-
             </VStack>
-            
         </Flex>
     );
 }
