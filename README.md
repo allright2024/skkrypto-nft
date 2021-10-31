@@ -13,14 +13,14 @@ use skkrypto;
 
 CREATE TABLE userinfo(
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-_userid varchar(32) NOT NULL,
+_userid varchar(64) NOT NULL,
 _userpw varchar(32) NOT NULL,
 _useremail varchar(32) NOT NULL
 );
 
 CREATE TABLE user(
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-_username varchar(32) NOT NULL,
+_username varchar(64) NOT NULL,
 _pointA int NOT NULL,
 _pointB int NOT NULL,
 _pointC int NOT NULL,
@@ -29,10 +29,10 @@ _pointD int NOT NULL
 
 CREATE TABLE transaction(
 id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-_from varchar(32) NOT NULL,
-_to varchar(32) NOT NULL,
+_from varchar(64) NOT NULL,
+_to varchar(64) NOT NULL,
 _point int NOT NULL,
-_type varchar(1) NOT NULL,
+_type varchar(10) NOT NULL,
 _date varchar(32)
 );
 
