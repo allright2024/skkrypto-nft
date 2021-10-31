@@ -29,49 +29,52 @@ const Time = styled.td`
   text-align: center;
 `;
 
-export default function LatestTransactions() {
+export default function LatestTransactions(props) {
+
+  const view = ()=>{
+    let tran = props.tran;
+    const result = [];
+    const realResult=[];
+    realResult.push(
+    <thead>
+      <tr>
+        <Th>플랫폼</Th>
+        <Th>시간</Th>
+        <Th>FROM</Th>
+        <Th>TO</Th>
+        <Th>금액</Th>
+        <Th>HASH</Th>
+      </tr>
+    </thead>
+    );
+    if(typeof props.tran === "object"){
+      for(let i=0;i<props.tran[0]?.length;i++){
+        console.log('asd');
+        result.push(
+          <tr>
+            <Td>
+              <HStack justifyContent="center">
+                <Icon src={kakaoTalk} />
+                <Text>{props.tran[3][i]}</Text>
+              </HStack>
+            </Td>
+            <Time>{props.tran[4][i]}</Time>
+            <Td>{props.tran[0][i].slice(0,8)}...</Td>
+            <Td>{props.tran[1][i].slice(0,8)}...</Td>
+            <Td>{props.tran[2][i]}</Td>
+            <Td>{props.tran[5][i]}</Td>
+          </tr>
+        )
+      }
+      console.log(result);
+    }
+    realResult.push(<tbody>{result}</tbody>);
+
+    return <Table>{realResult}</Table>
+  }
   return (
-    <Table>
-      <thead>
-        <tr>
-          <Th>플랫폼</Th>
-          <Th>시간</Th>
-          <Th>FROM</Th>
-          <Th>TO</Th>
-          <Th>금액</Th>
-          <Th>HASH</Th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <Td>
-            <HStack justifyContent="center">
-              <Icon src={kakaoTalk} />
-              <Text>kakaoPay</Text>
-            </HStack>
-          </Td>
-          <Time>2021-09-26 14:13:40</Time>
-          <Td>0xF503f059...</Td>
-          <Td>0xF503f059...</Td>
-          <Td>금액</Td>
-          <Td>ebcaef...</Td>
-        </tr>
-
-        <tr>
-          <Td>
-            <HStack justifyContent="center">
-              <Icon src={kakaoTalk} />
-              <Text>kakaoPay</Text>
-            </HStack>
-          </Td>
-          <Time>2021-09-26 14:13:40</Time>
-          <Td>0xF503f059...</Td>
-          <Td>0xF503f059...</Td>
-          <Td>금액</Td>
-          <Td>ebcaef...</Td>
-        </tr>
-      </tbody>
-    </Table>
+    <>
+      {view()}
+    </>
   );
 }
