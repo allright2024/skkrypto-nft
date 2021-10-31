@@ -11,8 +11,14 @@ import {
     FormErrorMessage,
     FormHelperText,
 } from "@chakra-ui/react";
+import { useWeb3React } from "@web3-react/core";
+import WalletConnect from "../components/WalletConnect";
+import moment from "moment";
 
 function AdminPage() {
+    const { library, account } = useWeb3React();
+    const signer = library.getSigner(account).connectUnchecked();
+
     const handleCreateTransaction = (event) => {
         console.log(event.target.parentElement.parentElement.children[1].value);
         console.log(event.target.parentElement.parentElement.children[3].value);
@@ -28,6 +34,22 @@ function AdminPage() {
         console.log(event.target.parentElement.children[1].value);
         console.log(event.target.parentElement.children[3].value);
         console.log(event.target.parentElement.children[5].value);
+    };
+
+    const handleDemo = () => {
+        let hash;
+        let m = moment().format("YYYY.MM.DD");
+        const message = JSON.stringify({
+            from: account,
+            to: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
+            point: 100,
+            type: "A",
+            date: m,
+        });
+
+        signer.signMessage(message).then((result) => (hash = result));
+
+        // 위의 hash 이용해서 Create transaction 보내면 됨
     };
 
     return (
@@ -113,6 +135,37 @@ function AdminPage() {
                         <Text>유저 정보 생성하기</Text>
                     </Button>
                 </FormControl>
+            </VStack>
+            <VStack
+                w="full"
+                backgroundColor="white"
+                borderRadius="5px"
+                p={5}
+                marginTop={5}
+                borderRadius={20}
+                align="flex-start"
+            >
+                <HStack justifyContent="space-between" w="full">
+                    <Text color="#4318FF" fontWeight={700} fontSize="lg">
+                        Demo
+                    </Text>
+                </HStack>
+                <Text fontSize="lg">A에게 100포인트 보내기</Text>
+                <WalletConnect />
+                <Button
+                    type="submit"
+                    onClick={handleDemo}
+                    h="40px"
+                    borderRadius={20}
+                    w="200px"
+                    bg="#4318FF"
+                    color="white"
+                    fontSize="sm"
+                    fontWeight="bold"
+                    mt={5}
+                >
+                    <Text>Demo 실행</Text>
+                </Button>
             </VStack>
         </Flex>
     );
