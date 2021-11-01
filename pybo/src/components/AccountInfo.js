@@ -42,7 +42,7 @@ function AccountInfo() {
                 fontFamily="'Pacifico', cursive"
                 fontSize="3xl"
             >
-                {account.substring(2, 6)}
+                {account?.substring(2, 6)}
             </Flex>
             <Text fontSize="lg">내 지갑 주소 : </Text>
             <Tooltip label={account}>
