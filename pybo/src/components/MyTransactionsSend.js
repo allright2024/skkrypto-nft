@@ -117,8 +117,8 @@ export default function MyTransactionsAll() {
   }
 
   return (
-    <div>
+    <>
       {createTransactionTable()}
-    </div>
+    </>
   );
 }
