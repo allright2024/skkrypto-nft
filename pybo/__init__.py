@@ -239,7 +239,7 @@ def viewAll():
         justDict = {}
         i = 1
         for tx in allTxs:
-            dictionary = {'from': tx._from, 'to': tx._to, 'value': tx._point, 'type': tx._type, 'create_date': tx._date}
+            dictionary = {'from': tx._from, 'to': tx._to, 'value': tx._point, 'type': tx._type, 'create_date': tx._date, 'hash':tx._hash}
             newDict = {str(i): dictionary}
             i += 1
             justDict = merge_dic(justDict, newDict)
