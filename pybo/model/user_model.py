@@ -18,12 +18,12 @@ class Transaction(db.Model):
     __tablename__='transaction'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
-    _from = db.Column(db.String(32,'utf8mb4_unicode_ci'), nullable = False)
-    _to = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable = False)
+    _from = db.Column(db.String(64,'utf8mb4_unicode_ci'), nullable = False)
+    _to = db.Column(db.String(64, 'utf8mb4_unicode_ci'), nullable = False)
     _point = db.Column(db.Integer, nullable = False)
     _type = db.Column(db.String(1, 'utf8mb4_unicode_ci'), nullable=False)
     _date = db.Column(db.String(32, 'utf8mb4_unicode_ci'))
-    _hash = db.Column(db.String(32, 'utf8mb4_unicode_ci'))
+    _hash = db.Column(db.String(64, 'utf8mb4_unicode_ci'))
 
     def __init__(self, _from, _to,_point, _type, _date, _hash):
         self._from = _from
@@ -49,7 +49,7 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
-    _username = db.Column(db.String(32, 'utf8mb4_unicode_ci'),nullable = False, unique=True)
+    _username = db.Column(db.String(64, 'utf8mb4_unicode_ci'),nullable = False, unique=True)
     _pointA = db.Column(db.Integer, nullable=False)
     _pointB = db.Column(db.Integer, nullable=False)
     _pointC = db.Column(db.Integer, nullable=False)
@@ -73,7 +73,7 @@ class UserInfo(db.Model):
     __tablename__ = 'userinfo'
 
     id = db.Column(db.Integer, primary_key = True, nullable = False, autoincrement=True) 
-    _userid = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable = False, unique=True)
+    _userid = db.Column(db.String(64, 'utf8mb4_unicode_ci'), nullable = False, unique=True)
     _userpw = db.Column(db.String(32, 'utf8mb4_unicode_ci'), nullable=False)
     _useremail=db.Column(db.String(32,'utf8mb4_unicode_ci'), nullable=False)
 
