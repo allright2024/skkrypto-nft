@@ -2,6 +2,7 @@ import styled from "styled-components";
 import kakaoTalk from "../assets/kakaoTalk.png";
 import { HStack, Text } from "@chakra-ui/layout";
 import { useState, useEffect } from "react";
+import { useWeb3React } from "@web3-react/core";
 
 const Table = styled.table`
   width: 100%;
@@ -50,6 +51,8 @@ export default function MyTransactionsAll() {
   const [dateListState, setDateListState] = useState(["Not Found"]);
   const [hashListState, setHashListState] = useState(["Not Found"]);
 
+  const {account} = useWeb3React();
+
   useEffect(() => {
     const fromList = [];
     const toList = [];
@@ -63,13 +66,14 @@ export default function MyTransactionsAll() {
         .then((jsons) => {
           console.log(jsons);
           for(let i = 1; i <= Object.keys(jsons).length; i++) {
-            if(jsons[i].from == "0x61C95C10959056297077E85c444EFE95c3BEf2d2" || jsons[i].to == "0x61C95C10959056297077E85c444EFE95c3BEf2d2") {
+            if(jsons[i].from == account || jsons[i].to == account) {
               fromList.push(jsons[i].from);
               toList.push(jsons[i].to);
               typeList.push(jsons[i].type);
               valueList.push(jsons[i].value);
               dateList.push(jsons[i].create_date);
               hashList.push(jsons[i].hash);
+              console.log(jsons);
             }
           }
           setFromListState(fromList);
