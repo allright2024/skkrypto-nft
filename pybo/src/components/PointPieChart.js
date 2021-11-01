@@ -1,6 +1,7 @@
 import { VStack, HStack, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ResponsiveContainer, PieChart, Pie } from "recharts";
+import { useWeb3React } from "@web3-react/core";
 
 const getRequest = (jsons) => {
     return {
@@ -16,10 +17,11 @@ const getRequest = (jsons) => {
 
 function PointPieChart() {
     const [pointArr, setPointArr] = useState([]);
+    const {account} = useWeb3React();
 
     useEffect(() => {
         //username를 생성하는 부분이 완성되면, 아래 fortest을 지우고 현재 로그인된 사용자의 username을 넣으면 됩니다. (성민)
-        let requestOpt = getRequest({"username":"fortest"});
+        let requestOpt = getRequest({"username":account});
         fetch("http://localhost:5000/api/userInfo", requestOpt)
             .then((response) => response.json())
             .then((jsons) => {
