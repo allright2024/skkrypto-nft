@@ -17,23 +17,67 @@ import moment from "moment";
 
 function AdminPage() {
     const { library, account } = useWeb3React();
-    const signer = library.getSigner(account).connectUnchecked();
+    const signer = library?.getSigner(account).connectUnchecked();
 
     const handleCreateTransaction = (event) => {
+        console.log(event);
+        let m = moment().format("YYYY.MM.DD");
+        fetch("http://localhost:5000/api/createTx", {
+            method: 'POST',
+            header: {
+                'Content-Type':'application/json',
+                "Access-Control-Allow-Origin":"*",
+                'Access-Control-Allow-Headers':"*"    
+            },
+            body:JSON.stringify({
+                from : event.target.parentElement.parentElement.children[1].value, 
+                to : event.target.parentElement.parentElement.children[3].value,
+                point : event.target.parentElement.parentElement.children[5].value,
+                type : event.target.parentElement.parentElement.children[7].value,
+                hash : event.target.parentElement.parentElement.children[9].value,
+                date : m
+            })
+          }).then(res => {
+              if (res.ok){
+                console.log("Successfully added Transaction");
+              }
+          }
+          )
+    };
+
+    const getRequest=(jsons)=>{
+        return{
+            method:'POST',
+            header:{
+                'Content-Type':'application/json',
+                "Access-Control-Allow-Origin":"*",
+                'Access-Control-Allow-Headers':"*"                
+            },
+            body:JSON.stringify(jsons)
+        }
+    }
+    const handleCreateUserInfo = (event) => {
         console.log(event.target.parentElement.parentElement.children[1].value);
         console.log(event.target.parentElement.parentElement.children[3].value);
         console.log(event.target.parentElement.parentElement.children[5].value);
-        console.log(event.target.parentElement.parentElement.children[7].value);
-        console.log(event.target.parentElement.parentElement.children[9].value);
-        console.log(
-            event.target.parentElement.parentElement.children[11].value
-        );
-    };
-
-    const handleCreateUserInfo = (event) => {
-        console.log(event.target.parentElement.children[1].value);
-        console.log(event.target.parentElement.children[3].value);
-        console.log(event.target.parentElement.children[5].value);
+        fetch("http://localhost:5000/api/createUser/", {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                "Access-Control-Allow-Origin":"*",
+                'Access-Control-Allow-Headers':"*"    
+            },
+            body: JSON.stringify({
+              id: event.target.parentElement.parentElement.children[1].value,
+              password: event.target.parentElement.parentElement.children[3].value,
+              email: event.target.parentElement.parentElement.children[5].value,                
+            })
+          }).then(res => {
+              if (res.ok){
+                console.log("Successfully added user");
+              }
+          }
+          )            
     };
 
     const handleDemo = () => {
@@ -48,9 +92,32 @@ function AdminPage() {
         });
 
         signer.signMessage(message).then((result) => (hash = result));
-
-        // 위의 hash 이용해서 Create transaction 보내면 됨
+        // 밑의 주석 이용하면 demo send 가능 
+        // const send_message = JSON.stringify({
+        //     from: account,
+        //     to: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
+        //     type: "A",
+        //     value: 100,
+        // });
+        // signer.signMessage(send_message).then((result) => (hash = result));
+        // // 위의 hash 이용해서 Create transaction 보내면 됨
+        // fetch("http://localhost:5000/api/createTx/", {
+        //     method:'POST',
+        //     header:{
+        //         'Content-Type':'application/json',
+        //         "Access-Control-Allow-Origin":"*",
+        //         'Access-Control-Allow-Headers':"*"                
+        //     },
+        //     body:JSON.send_message
+            
+        // }).then(() => {
+        //     console.log("added");
+        // }
+        // )
     };
+
+    
+
 
     return (
         <Flex m={10} flexDirection="column" w="full">
@@ -80,8 +147,6 @@ function AdminPage() {
                     <Input placeholder="ex) 300" />
                     <FormLabel>Type</FormLabel>
                     <Input placeholder="ex) A" />
-                    <FormLabel>Date</FormLabel>
-                    <Input placeholder="ex) 2018.05.03" />
                     <FormLabel>Hash</FormLabel>
                     <Input placeholder="Hash Value" />
                     <Button

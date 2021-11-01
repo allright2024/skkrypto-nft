@@ -6,18 +6,17 @@ import MyTransactionsReceive from "../components/MyTransactionsReceive";
 import TransactionsChart from "../components/TransactionsChart";
 import { useWeb3React } from "@web3-react/core";
 
-function MySelect({ select, account }) {
+function MySelect({ select }) {
     if (select === 2) {
-        return <MyTransactionsReceive account={account}/>;
+        return <MyTransactionsReceive/>;
     } else if (select === 1) {
-        return <MyTransactionsSend account = {account}/>;
+        return <MyTransactionsSend/>;
     } else {
-        return <MyTransactionsAll account={account}/>;
+        return <MyTransactionsAll/>;
     }
 }
 
 function MyTransactions() {
-    const { account } = useWeb3React();
 
     const [index, setIndex] = useState(0);
     
@@ -87,7 +86,7 @@ function MyTransactions() {
                 p={5}
                 marginTop={5}
             >
-                <MySelect select={index} account={account} />
+                <MySelect select={index}/>
             </VStack>
         </Flex>
     );

@@ -43,7 +43,7 @@ const getRequest=(jsons)=>{
   }
 }
 
-export default function MyTransactionsAll({account}) {
+export default function MyTransactionsAll() {
   const [fromListState, setFromListState] = useState(["Not Found"]);
   const [toListState, setToListState] = useState(["Not Found"]);
   const [typeListState, setTypeListState] = useState(["Not Found"]);
