@@ -1,6 +1,7 @@
 import { HStack, Text } from "@chakra-ui/layout";
 import styled from "styled-components";
 import kakaoTalk from "../assets/kakaoTalk.png";
+import {useEffect, useState} from "react";
 
 const Table = styled.table`
   width: 100%;
@@ -29,12 +30,64 @@ const Time = styled.td`
   text-align: center;
 `;
 
-export default function LatestTransactions(props) {
+const getRequest=(jsons)=>{
+  return{
+      method:'POST',
+      header:{
+          'Content-Type':'application/json',
+          "Access-Control-Allow-Origin":"*",
+          'Access-Control-Allow-Headers':"*"                
+      },
+      body:JSON.stringify(jsons)
+  }
+}
 
+export default function LatestTransactions() {
+  const [tran, setTran] = useState();
+  // setTran(props.tran);
+    const [fromList, setFromListState] = useState(["Not Found"]);
+    const [toList, setToListState] = useState(["Not Found"]);
+    const [typeList, setTypeListState] = useState(["Not Found"]);
+    const [valueList, setValueListState] = useState(["Not Found"]);
+    const [dateList, setDateListState] = useState(["Not Found"]);
+    const [hashList, setHashListState] = useState(["Not Found"]);
+
+    useEffect(() => {
+        const fromList = [];
+        const toList = [];
+        const typeList = [];
+        const valueList = [];
+        const dateList = [];
+        const hashList = [];
+        const requestOpt = getRequest();
+        fetch("http://localhost:5000/api/viewAll", requestOpt)
+            .then((response) => response.json())
+            .then((jsons) => {
+            console.log(jsons);
+            for(let i = 1; i <= Object.keys(jsons).length; i++) {
+            
+            fromList.push(jsons[i].from);
+            toList.push(jsons[i].to);
+            typeList.push(jsons[i].type);
+            valueList.push(jsons[i].value);
+            dateList.push(jsons[i].create_date);
+            hashList.push(jsons[i].hash);
+            
+            }
+            setFromListState(fromList);
+            setToListState(toList);
+            setTypeListState(typeList);
+            setValueListState(valueList);
+            setDateListState(dateList);
+            setHashListState(hashList);
+        });
+    }, [])
+
+  
   const view = ()=>{
-    let tran = props.tran;
     const result = [];
     const realResult=[];
+    
     realResult.push(
     <thead>
       <tr>
@@ -47,22 +100,23 @@ export default function LatestTransactions(props) {
       </tr>
     </thead>
     );
-    if(typeof props.tran === "object"){
-      for(let i=0;i<props.tran[0]?.length;i++){
-        console.log('asd');
+    console.log(typeof dateList)
+    if(typeof dateList === "object"){
+      for(let i=0;i<dateList.length;i++){
+        // console.log('asd');
         result.push(
           <tr>
             <Td>
               <HStack justifyContent="center">
                 <Icon src={kakaoTalk} />
-                <Text>{props.tran[3][i]}</Text>
+                <Text>{typeList[i]}</Text>
               </HStack>
             </Td>
-            <Time>{props.tran[4][i]}</Time>
-            <Td>{props.tran[0][i].slice(0,8)}...</Td>
-            <Td>{props.tran[1][i].slice(0,8)}...</Td>
-            <Td>{props.tran[2][i]}</Td>
-            <Td>{props.tran[5][i]}</Td>
+            <Time>{dateList[i]}</Time>
+            <Td>{fromList[i]}...</Td>
+            <Td>{toList[i]}...</Td>
+            <Td>{valueList[i]}</Td>
+            <Td>{hashList[i]}</Td>
           </tr>
         )
       }
