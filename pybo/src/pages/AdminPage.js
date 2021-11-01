@@ -20,11 +20,24 @@ function AdminPage() {
     const signer = library?.getSigner(account).connectUnchecked();
 
     const handleCreateTransaction = (event) => {
+<<<<<<< HEAD
         console.log(event);
         let m = moment().format("YYYY.MM.DD");
         fetch("http://localhost:5000/api/createTx", {
             method: 'POST',
             header: {
+=======
+        // console.log(event.target.parentElement.parentElement.children[1].value);
+        // console.log(event.target.parentElement.parentElement.children[3].value);
+        // console.log(event.target.parentElement.parentElement.children[5].value);
+        // console.log(event.target.parentElement.parentElement.children[7].value);
+        // console.log(event.target.parentElement.parentElement.children[9].value);
+        // console.log(event.target.parentElement.parentElement.children[11].value);
+        let m = moment().format("YYYY.MM.DD");
+        fetch("http://localhost:5000/api/createTx/", {
+            method: 'POST',
+            headers: {
+>>>>>>> 7117dcc8ea7b8b1f4497be7cc2fac4e7156149e5
                 'Content-Type':'application/json',
                 "Access-Control-Allow-Origin":"*",
                 'Access-Control-Allow-Headers':"*"    
@@ -34,8 +47,13 @@ function AdminPage() {
                 to : event.target.parentElement.parentElement.children[3].value,
                 point : event.target.parentElement.parentElement.children[5].value,
                 type : event.target.parentElement.parentElement.children[7].value,
+<<<<<<< HEAD
                 hash : event.target.parentElement.parentElement.children[9].value,
                 date : m
+=======
+                date : m,
+                hash : event.target.parentElement.parentElement.children[9].value,
+>>>>>>> 7117dcc8ea7b8b1f4497be7cc2fac4e7156149e5
             })
           }).then(res => {
               if (res.ok){
@@ -57,9 +75,15 @@ function AdminPage() {
         }
     }
     const handleCreateUserInfo = (event) => {
+<<<<<<< HEAD
         console.log(event.target.parentElement.parentElement.children[1].value);
         console.log(event.target.parentElement.parentElement.children[3].value);
         console.log(event.target.parentElement.parentElement.children[5].value);
+=======
+        console.log(event.target.parentElement.children[1].value);
+        console.log(event.target.parentElement.children[3].value);
+        console.log(event.target.parentElement.children[5].value);
+>>>>>>> 7117dcc8ea7b8b1f4497be7cc2fac4e7156149e5
         fetch("http://localhost:5000/api/createUser/", {
             method: 'POST',
             headers: {
@@ -68,9 +92,15 @@ function AdminPage() {
                 'Access-Control-Allow-Headers':"*"    
             },
             body: JSON.stringify({
+<<<<<<< HEAD
               id: event.target.parentElement.parentElement.children[1].value,
               password: event.target.parentElement.parentElement.children[3].value,
               email: event.target.parentElement.parentElement.children[5].value,                
+=======
+              id: event.target.parentElement.children[1].value,
+              password: event.target.parentElement.children[3].value,
+              email: event.target.parentElement.children[5].value,                
+>>>>>>> 7117dcc8ea7b8b1f4497be7cc2fac4e7156149e5
             })
           }).then(res => {
               if (res.ok){

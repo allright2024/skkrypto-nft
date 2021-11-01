@@ -13,7 +13,7 @@ CORS(app)
 
 db = {
     'user': 'root',
-    'password': '1234',
+    'password': 'smisawesome53!',
     'host': 'localhost',
     'port': '3306',
     'database': 'skkrypto'
@@ -166,7 +166,7 @@ def CreateTx():
 
     if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Aloow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "POST")
     elif request.method == "POST":
         response.headers.add("Access-Control-Allow-Origin", "*")
