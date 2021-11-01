@@ -52,9 +52,9 @@ function AdminPage() {
     };
 
     const handleCreateUserInfo = (event) => {
-        console.log(event.target.parentElement.children[1].value);
+        /*console.log(event.target.parentElement.children[1].value);
         console.log(event.target.parentElement.children[3].value);
-        console.log(event.target.parentElement.children[5].value);
+        console.log(event.target.parentElement.children[5].value);*/
         const id = event.target.parentElement.children[1].value
         const password = event.target.parentElement.children[3].value
         const email = event.target.parentElement.children[5].value
