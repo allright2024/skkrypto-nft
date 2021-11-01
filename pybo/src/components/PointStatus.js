@@ -14,10 +14,7 @@ const getRequest=(jsons)=>{
 }
 
 function PointStatus() {
-    const [APoint, setAPoint] = useState("unKnown");
-    const [BPoint, setBPoint] = useState("unKnown");
-    const [CPoint, setCPoint] = useState("unKnown");
-    const [DPoint, setDPoint] = useState("unKnown");
+    const [pointArr, setPointArr] = useState([]);
 
     useEffect(() => {
         //username를 생성하는 부분이 완성되면, 아래 fortest을 지우고 현재 로그인된 사용자의 username을 넣으면 됩니다. (성민)
@@ -25,10 +22,7 @@ function PointStatus() {
         fetch("http://localhost:5000/api/userInfo", requestOpt)
             .then((response) => response.json())
             .then((jsons) => {
-                setAPoint(jsons.pointA);
-                setBPoint(jsons.pointB);
-                setCPoint(jsons.pointC);
-                setDPoint(jsons.pointD);
+                setPointArr(pointArr.concat(jsons.pointA,jsons.pointB,jsons.pointC,jsons.pointD));
             });
     }, [])
 
@@ -49,19 +43,19 @@ function PointStatus() {
             <VStack spacing={10} w="full">
                 <HStack w="full" justify="space-between">
                     <Text fontSize="lg">Service A</Text>
-                    <Text fontSize="lg">{APoint}</Text>
+                    <Text fontSize="lg">{pointArr[0]}</Text>
                 </HStack>
                 <HStack w="full" justify="space-between">
                     <Text fontSize="lg">Service B</Text>
-                    <Text fontSize="lg">{BPoint}</Text>
+                    <Text fontSize="lg">{pointArr[1]}</Text>
                 </HStack>
                 <HStack w="full" justify="space-between">
                     <Text fontSize="lg">Service C</Text>
-                    <Text fontSize="lg">{CPoint}</Text>
+                    <Text fontSize="lg">{pointArr[2]}</Text>
                 </HStack>
                 <HStack w="full" justify="space-between">
                     <Text fontSize="lg">Service D</Text>
-                    <Text fontSize="lg">{DPoint}</Text>
+                    <Text fontSize="lg">{pointArr[3]}</Text>
                 </HStack>
             </VStack>
         </VStack>

@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import TotalPoint from "../components/TotalPoint";
 import PointStatus from "../components/PointStatus";
-import WalletConnect from "../components/WalletConnect";
+import PointPieChart from "../components/PointPieChart";
 import AccountInfo from "../components/AccountInfo";
 
 function DashBoard() {
@@ -26,7 +26,7 @@ function DashBoard() {
                 <TotalPoint />
                 <PointStatus />
                 <AccountInfo />
-                <PointStatus />
+                <PointPieChart />
                 <PointStatus />
             </Flex>
         </Flex>
