@@ -14,18 +14,19 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import WalletConnect from "../components/WalletConnect";
 import moment from "moment";
+import {useState} from "react"
 
 function AdminPage() {
     const { library, account } = useWeb3React();
     const signer = library?.getSigner(account).connectUnchecked();
+    const [input, setInput] = useState([])
 
     const handleCreateTransaction = (event) => {
-        // console.log(event.target.parentElement.parentElement.children[1].value);
-        // console.log(event.target.parentElement.parentElement.children[3].value);
-        // console.log(event.target.parentElement.parentElement.children[5].value);
-        // console.log(event.target.parentElement.parentElement.children[7].value);
-        // console.log(event.target.parentElement.parentElement.children[9].value);
-        // console.log(event.target.parentElement.parentElement.children[11].value);
+        const from = event.target.parentElement.parentElement.children[1].value
+        const to = event.target.parentElement.parentElement.children[3].value
+        const point = event.target.parentElement.parentElement.children[5].value
+        const type = event.target.parentElement.parentElement.children[7].value
+        const hash = event.target.parentElement.parentElement.children[9].value
         let m = moment().format("YYYY.MM.DD");
         fetch("http://localhost:5000/api/createTx/", {
             method: 'POST',
@@ -35,12 +36,12 @@ function AdminPage() {
                 'Access-Control-Allow-Headers':"*"    
             },
             body:JSON.stringify({
-                from : event.target.parentElement.parentElement.children[1].value, 
-                to : event.target.parentElement.parentElement.children[3].value,
-                point : event.target.parentElement.parentElement.children[5].value,
-                type : event.target.parentElement.parentElement.children[7].value,
+                from : from, 
+                to : to,
+                point : point,
+                type : type,
                 date : m,
-                hash : event.target.parentElement.parentElement.children[9].value,
+                hash : hash,
             })
           }).then(res => {
               if (res.ok){
@@ -50,21 +51,13 @@ function AdminPage() {
           )
     };
 
-    const getRequest=(jsons)=>{
-        return{
-            method:'POST',
-            header:{
-                'Content-Type':'application/json',
-                "Access-Control-Allow-Origin":"*",
-                'Access-Control-Allow-Headers':"*"                
-            },
-            body:JSON.stringify(jsons)
-        }
-    }
     const handleCreateUserInfo = (event) => {
         console.log(event.target.parentElement.children[1].value);
         console.log(event.target.parentElement.children[3].value);
         console.log(event.target.parentElement.children[5].value);
+        const id = event.target.parentElement.children[1].value
+        const password = event.target.parentElement.children[3].value
+        const email = event.target.parentElement.children[5].value
         fetch("http://localhost:5000/api/createUser/", {
             method: 'POST',
             headers: {
@@ -73,9 +66,9 @@ function AdminPage() {
                 'Access-Control-Allow-Headers':"*"    
             },
             body: JSON.stringify({
-              id: event.target.parentElement.children[1].value,
-              password: event.target.parentElement.children[3].value,
-              email: event.target.parentElement.children[5].value,                
+              id: id,
+              password: password,
+              email: email,
             })
           }).then(res => {
               if (res.ok){
