@@ -42,7 +42,7 @@ const getRequest=(jsons)=>{
   }
 }
 
-export default function MyTransactionsAll() {
+export default function MyTransactionsAll({account}) {
   const [fromListState, setFromListState] = useState(["Not Found"]);
   const [toListState, setToListState] = useState(["Not Found"]);
   const [typeListState, setTypeListState] = useState(["Not Found"]);
@@ -63,7 +63,7 @@ export default function MyTransactionsAll() {
         .then((jsons) => {
           console.log(jsons);
           for(let i = 1; i <= Object.keys(jsons).length; i++) {
-            if(jsons[i].to == "0x61C95C10959056297077E85c444EFE95c3BEf2d2") {
+            if(jsons[i].to == account) {
               fromList.push(jsons[i].from);
               typeList.push(jsons[i].type);
               valueList.push(jsons[i].value);
