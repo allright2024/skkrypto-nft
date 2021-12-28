@@ -13,7 +13,7 @@ CORS(app)
 
 db = {
     'user': 'root',
-    'password': '1234',
+    'password': '12345',
     'host': 'localhost',
     'port': '3306',
     'database': 'skkrypto'
@@ -34,14 +34,14 @@ def merge_dic(x, y):
     return z
 
 
-@app.route('/api/idverification/', methods=['POST', 'OPTIONS'])
+@app.route('/api/idverification/', methods=['GET', 'OPTIONS'])
 def verify():
     response = Response()
     if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+        response.headers.add("Access-Control-Allow-Methods", "GET")
+    elif request.method == "GET":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
@@ -66,14 +66,14 @@ def verify():
     return response
 
 
-@app.route('/api/emailValidator/', methods=['POST', 'OPTIONS'])
+@app.route('/api/emailValidator/', methods=['GET', 'OPTIONS'])
 def emailValidator():
     response = Response()
     if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+        response.headers.add("Access-Control-Allow-Methods", "GET")
+    elif request.method == "GET":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
@@ -126,15 +126,15 @@ def createUser():
     return response
 
 
-@app.route('/api/detail/txId/', methods=['POST', 'OPTIONS'])
+@app.route('/api/detail/txId/', methods=['GET', 'OPTIONS'])
 def detail():
     response = Response()
 
     if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Aloow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+        response.headers.add("Access-Control-Allow-Methods", "GET")
+    elif request.method == "GET":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()
@@ -243,15 +243,15 @@ def CreateTx():
     return response
 
 
-@app.route('/api/viewAll/', methods=["POST", "OPTIONS"])
+@app.route('/api/viewAll/', methods=["GET", "OPTIONS"])
 def viewAll():
     result = Response()
 
     if request.method == 'OPTIONS':
         result.headers.add("Access-Control-Allow-Origin", "*")
         result.headers.add("Access-Control-Aloow-Headers", "*")
-        result.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+        result.headers.add("Access-Control-Allow-Methods", "GET")
+    elif request.method == "GET":
         result.headers.add("Access-Control-Allow-Origin", "*")
 
         allTxs = Transaction.query.all()
@@ -268,14 +268,14 @@ def viewAll():
     return result
 
 
-@app.route('/api/userInfo/', methods=["POST", "OPTIONS"])
+@app.route('/api/userInfo/', methods=["GET", "OPTIONS"])
 def userInfo():
     response = Response()
     if request.method == 'OPTIONS':
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "POST")
-    elif request.method == "POST":
+        response.headers.add("Access-Control-Allow-Methods", "GET")
+    elif request.method == "GET":
         response.headers.add("Access-Control-Allow-Origin", "*")
 
         data1 = request.get_data()

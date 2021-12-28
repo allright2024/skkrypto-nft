@@ -31,17 +31,17 @@ const Time = styled.td`
   text-align: center;
 `;
 
-const getRequest=(jsons)=>{
-  return{
-      method:'POST',
-      header:{
-          'Content-Type':'application/json',
-          "Access-Control-Allow-Origin":"*",
-          'Access-Control-Allow-Headers':"*"                
-      },
-      body:JSON.stringify(jsons)
-  }
-}
+const getRequest = (jsons) => {
+  return {
+    method: "GET",
+    header: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+    },
+    body: JSON.stringify(jsons),
+  };
+};
 
 export default function MyTransactionsAll() {
   const [fromListState, setFromListState] = useState(["Not Found"]);
@@ -51,7 +51,7 @@ export default function MyTransactionsAll() {
   const [dateListState, setDateListState] = useState(["Not Found"]);
   const [hashListState, setHashListState] = useState(["Not Found"]);
 
-  const {account} = useWeb3React();
+  const { account } = useWeb3React();
 
   useEffect(() => {
     const fromList = [];
@@ -62,32 +62,32 @@ export default function MyTransactionsAll() {
     const hashList = [];
     const requestOpt = getRequest();
     fetch("http://localhost:5000/api/viewAll", requestOpt)
-        .then((response) => response.json())
-        .then((jsons) => {
-          console.log(jsons);
-          for(let i = 1; i <= Object.keys(jsons).length; i++) {
-            if(jsons[i].from == account || jsons[i].to == account) {
-              fromList.push(jsons[i].from);
-              toList.push(jsons[i].to);
-              typeList.push(jsons[i].type);
-              valueList.push(jsons[i].value);
-              dateList.push(jsons[i].create_date);
-              hashList.push(jsons[i].hash);
-              console.log(jsons);
-            }
+      .then((response) => response.json())
+      .then((jsons) => {
+        console.log(jsons);
+        for (let i = 1; i <= Object.keys(jsons).length; i++) {
+          if (jsons[i].from == account || jsons[i].to == account) {
+            fromList.push(jsons[i].from);
+            toList.push(jsons[i].to);
+            typeList.push(jsons[i].type);
+            valueList.push(jsons[i].value);
+            dateList.push(jsons[i].create_date);
+            hashList.push(jsons[i].hash);
+            console.log(jsons);
           }
-          setFromListState(fromList);
-          setToListState(toList);
-          setTypeListState(typeList);
-          setValueListState(valueList);
-          setDateListState(dateList);
-          setHashListState(hashList);
-        });
-    }, [])
+        }
+        setFromListState(fromList);
+        setToListState(toList);
+        setTypeListState(typeList);
+        setValueListState(valueList);
+        setDateListState(dateList);
+        setHashListState(hashList);
+      });
+  }, []);
 
   const createTransactionTable = () => {
     const displayedTable = [];
-    for(let i = 0; i < valueListState.length; i++) {
+    for (let i = 0; i < valueListState.length; i++) {
       displayedTable.push(
         <tr>
           <Td>
@@ -102,31 +102,25 @@ export default function MyTransactionsAll() {
           <Td>{valueListState[i]}</Td>
           <Td>{hashListState[i]}</Td>
         </tr>
-      )
+      );
     }
-    return(
+    return (
       <Table>
-      <thead>
-        <tr>
-          <Th>플랫폼</Th>
-          <Th>시간</Th>
-          <Th>FROM</Th>
-          <Th>TO</Th>
-          <Th>금액</Th>
-          <Th>HASH</Th>
-        </tr>
-      </thead>
+        <thead>
+          <tr>
+            <Th>플랫폼</Th>
+            <Th>시간</Th>
+            <Th>FROM</Th>
+            <Th>TO</Th>
+            <Th>금액</Th>
+            <Th>HASH</Th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {displayedTable}
-      </tbody>
-    </Table>
-    )
-  }
+        <tbody>{displayedTable}</tbody>
+      </Table>
+    );
+  };
 
-  return (
-    <>
-      {createTransactionTable()}
-    </>
-  );
+  return <>{createTransactionTable()}</>;
 }
